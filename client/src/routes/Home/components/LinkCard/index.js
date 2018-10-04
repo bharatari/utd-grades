@@ -11,6 +11,8 @@ const dummyItem = classNames(
 function LinkCard({ name, backgroundColor, icon, link, dummy }) {
   function handleClick(e) {
     e.preventDefault();
+
+    window.location.href = link;
   }
 
   // Dummy items are used so that items maintain the
@@ -22,7 +24,7 @@ function LinkCard({ name, backgroundColor, icon, link, dummy }) {
   }
 
   return (
-    <div className={classes.card} style={{ backgroundColor }}>
+    <div className={classes.card} style={{ backgroundColor }} onClick={handleClick}>
       <p className={classes.name}>{name}</p>
     </div>
   );

@@ -56,3 +56,11 @@
   flex-flow: row wrap;
   align-content: flex-start;
 }
+
+.footer {
+  position: absolute;
+  bottom: 15px;
+  text-align: center;
+  width: 100%;
+  display: block;
+}

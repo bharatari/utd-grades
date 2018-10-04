@@ -1,18 +1,24 @@
 import React from 'react';
 import classes from './styles.scss';
 import { Form, LinkCard } from './components';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Icon, Popover } from 'antd';
 
 export default class HomeView extends React.Component {
   state = {
     links: [
       { name: 'The Mercury', backgroundColor: '#393939', link: 'https://www.utdmercury.com' },
-      { name: 'eLearning', backgroundColor: '#F3A731' },
-      { name: 'UTD Galaxy', backgroundColor: '#5C95E0' },
-      { name: 'Coursebook', backgroundColor: '#079885' }
+      { name: 'eLearning', backgroundColor: '#F3A731', link: 'https://elearning.utdallas.edu' },
+      { name: 'UTD Galaxy', backgroundColor: '#5C95E0', link: 'https://galaxy.utdallas.edu' },
+      { name: 'Coursebook', backgroundColor: '#079885', link: 'https://coursebook.utdallas.edu' },
     ],
   };
   render() {
+    const donors = (
+      <div style={{ width: '300px' }}>
+        <p>Thank you to the following people for donating and making this possible (in order of most monetary support): Anthony-Tien Huynh, Adam Butcher, Paul Denino, Thomas Sowders, Xavier Brown, Enza Denino, David Garvin, Alastair Feille, Andrew Vaccaro, other anonymous donors, and people who don't use AdBlock.</p>      
+      </div>
+    );
+
     return (
       <div className={classes.background}>
         <div className={classes.content}>
@@ -34,6 +40,10 @@ export default class HomeView extends React.Component {
               </div>
             </Col>
           </Row>
+        </div>
+        <div className={classes.footer}>
+          <p>Built with <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" /> by <a href="https://www.acmutd.co">ACM Labs</a> and powered <Icon type="thunderbolt" theme="twoTone" twoToneColor="#ffcc00" /> by <a href="https://www.utdmercury.com">The Mercury</a>.</p>
+          <p>Designed by Bharat Arimilli. Thanks to Garrett Gu, Jeffrey Wang, Joseph Wickline and our <Popover content={donors}><span style={{ textDecoration: 'underline' }}>donors</span>.</Popover></p>
         </div>
       </div>
     );
