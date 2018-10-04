@@ -1,0 +1,41 @@
+.card {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+  border: none;
+  padding: 20px;
+  line-height: 1.5;
+  box-shadow: border-box;
+  list-style: none;
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.3s;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  flex-basis: 300px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.dummy {
+  visibility: hidden;
+}
+
+.card:hover {
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.46);
+}
+
+.name {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+
+  .dummy {
+    display: none;
+  }
+}

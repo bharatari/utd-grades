@@ -1,25 +1,11 @@
 .background {
-  background-image: url('/background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: white;
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   z-index: 0;
-}
-
-.background:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  opacity: 0.8;
-  background-color: #0e0e0e;
-  z-index: 100;
 }
 
 .content {
@@ -33,8 +19,40 @@
   font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-transform: uppercase;
   text-align: center;
-  color: white;
+  color: rgb(78, 78, 78);
   font-weight: 300;
-  letter-spacing: 1px;
-  font-size: 42px;
+  letter-spacing: 2px;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  color: #95989A;
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.headerBold {
+  font-weight: 700;
+}
+
+.quickLinksHeader {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.quickLinksContainer {
+  margin-top: 100px;
+}
+
+.quickLinkItems {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  align-content: flex-start;
 }
