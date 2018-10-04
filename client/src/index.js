@@ -6,6 +6,7 @@ import configureStore from 'store/';
 import Routes from 'routes/';
 
 import './styles/index.css';
+import 'antd/dist/antd.css';
 
 const initialState = {};
 const store = configureStore(initialState);
