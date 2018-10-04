@@ -4,7 +4,7 @@ module.exports = {
   success(data) {
     return {
       statusCode: 200,
-      body: data,
+      body: JSON.stringify(data),
     };
   },
   created(data) {

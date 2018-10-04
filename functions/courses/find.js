@@ -9,7 +9,7 @@ module.exports.find = async (event) => {
   try {
     let response = await courses.find(event['queryStringParameters']);
     
-    return respond.success(response);
+    return respond.success(response.Items);
   } catch (e) {
     return respond.error(e);
   }  

@@ -9,7 +9,7 @@ module.exports.get = async (event) => {
   try {
     let response = await courses.get(event.path.id);
 
-    return respond.success(response);
+    return respond.success(response.Item);
   } catch (e) {
     return respond.error(e);
   }
