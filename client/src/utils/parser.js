@@ -5,7 +5,7 @@ export default {
     const prefixPattern = new RegExp('(?<!\\w)(?!summer|spring|fall)([a-zA-Z]{2,4})(?=(\\s|\\d+))');
     const numberPattern = new RegExp('(?<!fall\\s?|spring\\s?|summer\\s?)(\\d{4})');
     const yearPattern = new RegExp('(?<=fall\\s|fall|spring\\s|spring|summer\\s|summer)(\\d{4})');
-    const semesterPattern = new RegExp('(fall\\s|fall|spring\\s|spring|summer\\s|summer)(?=\\d{4})');
+    const semesterPattern = new RegExp('(fall|spring|summer)(?=\\d{4}|\\s\\d{4})');
     const sectionPattern = new RegExp('(?<=\\d{4}|\\d{4}\\s|\\.)(\\d{1,3}|\\w{1,3})(?=\\s|$)');
 
     const prefix = searchString.match(prefixPattern);
