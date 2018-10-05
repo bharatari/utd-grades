@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.311.0",
-    "dotenv": "^6.0.0"
+    "dotenv": "^6.0.0",
+    "pg": "^7.5.0",
+    "progress": "^2.0.0",
+    "sequelize": "^4.39.0"
   },
   "devDependencies": {},
   "scripts": {
