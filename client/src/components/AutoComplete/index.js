@@ -27,7 +27,7 @@ export default class AutoComplete extends React.Component {
 
     return (
       <Complete className={this.props.classes} size="large" value={value} dataSource={data}
-        children={children} onSearch={this.handleSearch} placeholder={placeholder} />
+        children={children} onSearch={this.handleSearch} placeholder={placeholder} onChange={this.handleChange} />
     );
   }
 }
