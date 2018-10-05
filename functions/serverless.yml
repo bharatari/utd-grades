@@ -18,7 +18,10 @@ service: utd-grades
 # frameworkVersion: "=X.X.X"
 
 # Get environment variables
-custom: ${file(env.yml)}
+custom:
+  serverless-offline:
+    port: 4000
+  dbConfig: ${file(env.yml)}
 
 provider:
   name: aws
@@ -30,10 +33,10 @@ provider:
     environment: production
     project: utd-grades
   environment:
-    dbName: ${self:custom.dbName}
-    dbUser: ${self:custom.dbUser}
-    dbPass: ${self:custom.dbPass}
-    dbHost: ${self:custom.dbHost}
+    dbName: ${self:custom.dbConfig.dbName}
+    dbUser: ${self:custom.dbConfig.dbUser}
+    dbPass: ${self:custom.dbConfig.dbPass}
+    dbHost: ${self:custom.dbConfig.dbHost}
 
 # you can overwrite defaults here
 #  stage: dev
