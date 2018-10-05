@@ -1,0 +1,14 @@
+{
+  "name": "utd-grades",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "pg": "^7.5.0",
+    "sequelize": "^4.39.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^3.27.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

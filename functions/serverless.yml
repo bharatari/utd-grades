@@ -17,6 +17,9 @@ service: utd-grades
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+# Get environment variables
+custom: ${file(env.yml)}
+
 provider:
   name: aws
   runtime: nodejs8.10
@@ -26,6 +29,11 @@ provider:
   stackTags:
     environment: production
     project: utd-grades
+  enivronment:
+    dbName: ${self:custom.dbName}
+    dbUser: ${self:custom.dbUser}
+    dbPass: ${self:custom.dbPass}
+    dbHost: ${self:custom.dbHost}
 
 # you can overwrite defaults here
 #  stage: dev
@@ -61,24 +69,21 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  getCourse:
-    handler: courses/get.get
+  getSection:
+    handler: services/section/get.get
     events:
       - http:
-          path: course/{id}
+          path: section/{id}
           method: get 
           request: 
             parameters: 
               paths: 
                 id: true
   
-  findCourse:
-    handler: courses/find.find
+  findSection:
+    handler: services/section/find.find
     events:
-      - http: get course
-      
-
-    
+      - http: get section
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
