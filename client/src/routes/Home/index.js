@@ -6,11 +6,12 @@ import { rootSaga } from './modules/sagas';
 import { injectReducer, injectSaga } from 'modules/';
 import View from './View';
 import * as section from '../../modules/section/actions';
+import { normalizedSectionsSelector } from 'modules/section/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
   location: ownProps.location,
   history: ownProps.history,
-  sections: state.section.fetchSections.sections,
+  sections: normalizedSectionsSelector(state),
 });
 
 const actionCreators = {

@@ -14,7 +14,8 @@ class HomeForm extends React.Component {
 
     return (
       <Form>
-        <Field name="search" classes={classes.input} data={sections} placeholder="ex. CS 1337" component={renderField} onSearch={onSearch} />
+        <Field name="search" classes={classes.input} data={sections} placeholder="ex. CS 1337" component={renderField} onSearch={onSearch}
+          uniqueKey="id" labelKey="name" />
       </Form>
     )
   }
