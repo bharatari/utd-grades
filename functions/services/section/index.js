@@ -15,9 +15,15 @@ class Section {
         id,
       },
       include: [
-        { model: models.professor },
-        { model: models.course },
-        { model: models.semester },
+        {
+          model: models.professor
+        },
+        {
+          model: models.course,
+          include: [
+            { model: models.semester },
+          ],
+        },
       ],
     });
 
