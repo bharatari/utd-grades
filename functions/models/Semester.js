@@ -19,9 +19,9 @@ module.exports = function (sequelize) {
     },
     getterMethods: {
       name() {
-        const capitalizedYear = this.year.charAt(0).toUpperCase() + this.year.slice(1);
+        const capitalizedType = this.type.charAt(0).toUpperCase() + this.type.slice(1);
 
-        return `${this.year} ${capitalizedYear}`;
+        return `${this.year} ${capitalizedType}`;
       },
     },
   });
