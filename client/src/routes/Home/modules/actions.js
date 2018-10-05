@@ -2,5 +2,6 @@ import { createAction } from 'redux-actions';
 
 export const actionPrefix = 'Home/';
 
-export const REQUEST_COURSES = `${actionPrefix}REQUEST_COURSES`;
-export const requestCourses = createAction(REQUEST_COURSES);
+export const EXAMPLE_ACTION = `${actionPrefix}EXAMPLE_ACTION`;
+export const exampleAction = createAction(EXAMPLE_ACTION);
+
