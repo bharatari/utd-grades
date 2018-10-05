@@ -29,7 +29,7 @@ provider:
   stackTags:
     environment: production
     project: utd-grades
-  enivronment:
+  environment:
     dbName: ${self:custom.dbName}
     dbUser: ${self:custom.dbUser}
     dbPass: ${self:custom.dbPass}

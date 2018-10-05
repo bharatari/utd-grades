@@ -1,5 +1,5 @@
 const Section = require('./index');
-const respond = require('../utils/respond');
+const respond = require('../../utils/respond');
 
 module.exports.get = async (event) => {
   try {
