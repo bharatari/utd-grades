@@ -15,7 +15,7 @@ export default class HomeView extends React.Component {
   render() {
     const donors = (
       <div style={{ width: '300px' }}>
-        <p>Thank you to the following people for donating and making this possible (in order of most monetary support): Anthony-Tien Huynh, Adam Butcher, Paul Denino, Thomas Sowders, Xavier Brown, Enza Denino, David Garvin, Alastair Feille, Andrew Vaccaro, other anonymous donors, and people who don't use AdBlock.</p>      
+        <p>Thank you to the following people for donating and making this possible (in order of most monetary support): Anthony-Tien Huynh, Adam Butcher, Paul Denino, Thomas Sowders, Xavier Brown, Enza Denino, David Garvin, Alastair Feille, Andrew Vaccaro and other anonymous donors.</p>      
       </div>
     );
 
