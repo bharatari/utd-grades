@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import course from './course/reducer';
+import { reducer as form } from 'redux-form';
+import section from './section/reducer';
 
 export default function createReducer(injectedReducers) {
   return combineReducers({
-    course,
+    section,
+    form,
     ...injectedReducers,
   });
 }

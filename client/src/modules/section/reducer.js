@@ -1,34 +1,34 @@
 import { handleActions } from 'redux-actions';
 
 const initialState = {
-  fetchCourses: {
+  fetchSections: {
     requesting: false,
-    courses: null,
+    sections: null,
     error: null,
   },
-  fetchCourse: {
+  fetchSection: {
     requesting: false,
-    course: null,
+    section: null,
     error: null,
   },
 };
 
 export default handleActions({
-  REQUEST_COURSES: (state, action) => ({
+  REQUEST_SECTIONS: (state, action) => ({
     ...state,
-    fetchCourses: {
-      ...state.fetchCourses,
+    fetchSections: {
+      ...state.fetchSections,
       requesting: true,
     },
   }),
-  RECEIVE_COURSES: {
+  RECEIVE_SECTIONS: {
     next(state, action) {
       return {
         ...state,
-        fetchCourses: {
-          ...state.fetchCourses,
+        fetchSections: {
+          ...state.fetchSections,
           requesting: false,
-          courses: action.payload,
+          sections: action.payload,
           error: null,
         },
       };
@@ -36,32 +36,32 @@ export default handleActions({
     throw(state, action) {
       return {
         ...state,
-        fetchCourses: {
-          ...state.fetchCourses,
+        fetchSections: {
+          ...state.fetchSections,
           requesting: false,
-          courses: null,
+          sections: null,
           error: action.payload,
         },
       };
     }
   },
-  REQUEST_COURSE: (state, action) => ({
+  REQUEST_SECTION: (state, action) => ({
     ...state,
-    fetchCourse: {
-      ...state.fetchCourse,
+    fetchSection: {
+      ...state.fetchSection,
       requesting: true,
-      course: null,
+      section: null,
       error: null,
     },
   }),
-  RECEIVE_COURSE: {
+  RECEIVE_SECTION: {
     next(state, action) {
       return {
         ...state,
-        fetchCourse: {
-          ...state.fetchCourse,
+        fetchSection: {
+          ...state.fetchSection,
           requesting: false,
-          course: action.payload,
+          section: action.payload,
           error: null,
         },
       };
@@ -69,10 +69,10 @@ export default handleActions({
     throw(state, action) {
       return {
         ...state,
-        fetchCourse: {
-          ...state.fetchCourse,
+        fetchSection: {
+          ...state.fetchSection,
           requesting: false,
-          course: null,
+          section: null,
           error: action.payload,
         },
       };

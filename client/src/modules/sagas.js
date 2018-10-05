@@ -1,8 +1,8 @@
-import * as course from './course/sagas';
-import { put, take, call, takeLatest } from 'redux-saga/effects';
+import * as section from './section/sagas';
+import { all, put, take, call, takeLatest } from 'redux-saga/effects';
 
 export default function* rootSaga() {
-  yield [
-    course.rootSaga(),
-  ]
+  yield all([
+    section.rootSaga(),
+  ]);
 }
