@@ -4,6 +4,10 @@ module.exports = {
   success(data) {
     return {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: JSON.stringify(data),
     };
   },
@@ -13,6 +17,10 @@ module.exports = {
   badRequest(e) {
     return {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: JSON.stringify(e.message)
     };
   },
@@ -22,6 +30,10 @@ module.exports = {
     } else {
       return {
         statusCode: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true,
+        },
         body: JSON.stringify(e.message)
       };
     }

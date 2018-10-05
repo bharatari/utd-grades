@@ -79,11 +79,15 @@ functions:
             parameters: 
               paths: 
                 id: true
+          cors: true
   
   findSection:
     handler: services/section/find.find
     events:
-      - http: get section
+      - http:
+          path: section
+          method: get
+          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
