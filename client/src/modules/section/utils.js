@@ -9,9 +9,11 @@ export default {
     return sections;
   },
   buildSectionName(section) {
-    const name = `${section.course.prefix} ${section.course.number}.${section.number} - ${section.professor.firstName} ${section.professor.lastName}`;
+    if (section) {
+      const name = `${section.course.prefix} ${section.course.number}.${section.number} - ${section.professor.firstName} ${section.professor.lastName}`;
 
-    section.name = name;
+      section.name = name;
+    }
 
     return section;
   }

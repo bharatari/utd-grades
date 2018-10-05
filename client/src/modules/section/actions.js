@@ -6,4 +6,4 @@ export const receiveSections = createAction('RECEIVE_SECTIONS');
 
 export const fetchSection = createAction('FETCH_SECTION');
 export const requestSection = createAction('REQUEST_SECTION');
-export const receiveSection = createAction('RECEIVE_SECTIONS');
+export const receiveSection = createAction('RECEIVE_SECTION');
