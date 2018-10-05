@@ -26,7 +26,8 @@
   },
   "devDependencies": {
     "nwb": "0.21.x",
-    "nwb-sass": "^0.9.0"
+    "nwb-sass": "^0.9.0",
+    "redux-devtools-extension": "^2.13.5"
   },
   "author": "",
   "license": "MIT",
