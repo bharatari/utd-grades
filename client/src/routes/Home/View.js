@@ -12,6 +12,9 @@ export default class HomeView extends React.Component {
       { name: 'Coursebook', backgroundColor: '#079885', link: 'https://coursebook.utdallas.edu' },
     ],
   };
+  handleSearch = (search) => {
+    this.props.actions.fetchSections(search);
+  };
   render() {
     const donors = (
       <div style={{ width: '300px' }}>
@@ -26,7 +29,7 @@ export default class HomeView extends React.Component {
             <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
               <h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2>
               <p className={classes.description}>See how students did in any given class. And it's <strong>free, forever.</strong></p>
-              <Form />
+              <Form onSearch={this.handleSearch} sections={this.props.sections} />
             </Col>
           </Row>
           <Row className={classes.quickLinksContainer}>
