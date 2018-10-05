@@ -7,9 +7,9 @@ export function* fetchSections(action) {
   yield put(actions.requestSections());
 
   const params = parse.parseSearchString(action.payload);
-
+  console.log(params);
   try {
-    const response = yield call(data.request.bind(data), 'section', 'find', null, params);
+    const response = yield call(data.request.bind(data), 'section', 'get', null, params);
 
     yield put(actions.receiveSections(response));
   } catch (e) {

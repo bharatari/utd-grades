@@ -5,11 +5,11 @@ import fetch from 'isomorphic-fetch';
 export default {
   base() {
     if (__DEV__) {
-      return 'http://localhost:8080';
+      return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/production';
     } else if (__TEST__) {
-      return 'http://localhost:8080';
+      return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/production';
     } else {
-      return '';
+      return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/production';
     }
   },
   getCurrentBase() {
@@ -21,7 +21,7 @@ export default {
      
     return url;
   },
-  apiRoot: '/api',
+  apiRoot: '',
   options: {
     headers: {},
   },
