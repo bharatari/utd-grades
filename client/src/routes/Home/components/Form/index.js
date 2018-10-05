@@ -13,9 +13,9 @@ class HomeForm extends React.Component {
     const { handleSubmit, sections, onSearch, pristine, reset, submitting } = this.props;
 
     return (
-      <Form>
-        <Field name="search" classes={classes.input} data={sections} placeholder="ex. CS 1337" component={renderField} onSearch={onSearch}
-          uniqueKey="id" labelKey="name" />
+      <Form onSubmit={handleSubmit}>
+        <Field name="id" classes={classes.input} data={sections} placeholder="ex. CS 1337"
+          component={renderField} onSearch={onSearch} uniqueKey="id" labelKey="name" />
       </Form>
     )
   }
