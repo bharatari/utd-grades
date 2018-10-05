@@ -32,7 +32,7 @@ class Section {
       let where = {};
 
       if (!_.isNil(queryParams['sectionNumber'])) {
-        where.number = queryParams['sectionNumber'];
+        where.number = queryParams['sectionNumber'].trim();
       }
 
       return where;
@@ -42,11 +42,11 @@ class Section {
       let where = {};
 
       if (!_.isNil(queryParams['professorFirstName'])) {
-        where.firstName = queryParams['professorFirstName'];
+        where.firstName = queryParams['professorFirstName'].trim();
       }
 
       if (!_.isNil(queryParams['professorLastName'])) {
-        where.lastName = queryParams['professorLastName'];
+        where.lastName = queryParams['professorLastName'].trim();
       }
 
       return where;
@@ -56,11 +56,11 @@ class Section {
       let where = {};
 
       if (!_.isNil(queryParams['courseNumber'])) {
-        where.number = queryParams['courseNumber'];
+        where.number = queryParams['courseNumber'].trim();
       }
 
       if (!_.isNil(queryParams['coursePrefix'])) {
-        where.prefix = queryParams['coursePrefix'];
+        where.prefix = queryParams['coursePrefix'].toUpperCase().trim();
       }
       
       return where;
@@ -70,11 +70,11 @@ class Section {
       let where = {};
 
       if (!_.isNil(queryParams['year'])) {
-        where.year = queryParams['year'];
+        where.year = queryParams['year'].trim();
       }
 
       if (!_.isNil(queryParams['type'])) {
-        where.type = queryParams['type'];
+        where.type = queryParams['type'].toLowerCase().trim();
       }
 
       return where;
