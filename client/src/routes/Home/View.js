@@ -8,9 +8,9 @@ export default class HomeView extends React.Component {
   state = {
     links: [
       { name: 'The Mercury', backgroundColor: '#393939', link: 'https://www.utdmercury.com' },
-      { name: 'eLearning', backgroundColor: '#F3A731', link: 'https://elearning.utdallas.edu' },
-      { name: 'UTD Galaxy', backgroundColor: '#5C95E0', link: 'https://galaxy.utdallas.edu' },
-      { name: 'Coursebook', backgroundColor: '#079885', link: 'https://coursebook.utdallas.edu' },
+      { name: 'eLearning', backgroundColor: '#E98300', link: 'https://elearning.utdallas.edu' },
+      { name: 'UTD Galaxy', backgroundColor: '#00A1DE', link: 'https://galaxy.utdallas.edu' },
+      { name: 'Coursebook', backgroundColor: '#69BE28', link: 'https://coursebook.utdallas.edu' },
     ],
   };
   handleSearch = (search) => {
@@ -34,7 +34,7 @@ export default class HomeView extends React.Component {
             <Col xs={{ span: 18, offset: 3 }} sm={{ span: 18, offset: 3 }} span={12} offset={6}>
               <p className={classes.quickLinksHeader}>Quick Links</p>
 
-              <div className={classes.quickLinkItems}>
+              <div className={classes.quickLinkItems}> 
                 {this.state.links.map((link) => <LinkCard key={link.name} {...link} />)}
                 <LinkCard dummy />
                 <LinkCard dummy />
