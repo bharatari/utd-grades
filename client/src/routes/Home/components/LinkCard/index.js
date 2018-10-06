@@ -2,32 +2,34 @@ import React from 'react';
 import classes from './styles.scss';
 import { Card } from 'antd';
 import classNames from 'classnames';
+import { SlideUp } from 'components/Animations';
 
 const dummyItem = classNames(
   classes.card,
   classes.dummy
 );
 
-function LinkCard({ name, backgroundColor, icon, link, dummy }) {
-  function handleClick(e) {
+export default class LinkCard extends React.Component {
+  handleClick = (e) => {
     e.preventDefault();
 
     window.location.href = link;
-  }
+  };
+  render() {
+    const { key, name, backgroundColor, icon, link, dummy } = this.props;
 
-  // Dummy items are used so that items maintain the
-  // same width in the flexbox container
-  if (dummy) {
+    if (dummy) {
+      return (
+        <div className={dummyItem}></div>
+      );
+    }
+
     return (
-      <div className={dummyItem}></div>
+      <SlideUp {...this.props} startAt={100}>
+        <div className={classes.card} style={{ backgroundColor }} onClick={this.handleClick}>
+          <p className={classes.name}>{name}</p>
+        </div>
+      </SlideUp>
     );
   }
-
-  return (
-    <div className={classes.card} style={{ backgroundColor }} onClick={handleClick}>
-      <p className={classes.name}>{name}</p>
-    </div>
-  );
-};
-
-export default LinkCard;
+}
