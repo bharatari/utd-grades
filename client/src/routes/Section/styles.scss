@@ -9,7 +9,8 @@
 }
 
 .content {
-  padding-top: 30vh; 
+  margin-top: 30vh;
+  z-index: 999;
   display: block;
   position: relative;
 }

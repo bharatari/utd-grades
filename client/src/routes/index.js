@@ -1,9 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router';
 import Home from './Home';
+import Section from './Section';
 
 export default ({ store }) => (
-  <div>
+  <React.Fragment>
     <Route path="/" exact component={Home(store)} />
-  </div>
+    <Route path="/app/section/:id" component={Section} />
+  </React.Fragment>
 );

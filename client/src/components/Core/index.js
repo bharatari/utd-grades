@@ -10,8 +10,10 @@ function Core({ children }) {
   );
 
   return (
-    <div>
-      {children}
+    <div className={classes.container}>
+      <div className={classes.body}>
+        {children}
+      </div>
       <div className={classes.footer}>
         <p>Built with <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" /> by <a href="https://www.acmutd.co">ACM Labs</a> and powered <Icon type="thunderbolt" theme="twoTone" twoToneColor="#ffcc00" /> by <a href="https://www.utdmercury.com">The Mercury</a>.</p>
         <p>Designed by Bharat Arimilli. Thanks to Garrett Gu, Jeffrey Wang, Joseph Wickline and our <Popover content={donors}><span style={{ textDecoration: 'underline' }}>donors</span>.</Popover></p>
