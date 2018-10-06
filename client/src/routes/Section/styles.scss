@@ -1,18 +1,18 @@
-.background {
-  background-color: white;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 0;
-}
-
 .content {
-  margin-top: 30vh;
-  z-index: 999;
   display: block;
   position: relative;
+}
+
+.menu {
+  padding: 15px;
+}
+
+.back {
+  background: none;
+  outline: none;
+  border: none;
+  display: inline-block;
+  margin-top: 15px;
 }
 
 .header {
@@ -24,15 +24,7 @@
   letter-spacing: 2px;
   font-size: 26px;
   margin-bottom: 15px;
-}
-
-.description {
-  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  color: #95989A;
-  font-weight: 400;
-  font-size: 18px;
-  margin-bottom: 30px;
+  margin-top: -15px;
 }
 
 .headerBold {
