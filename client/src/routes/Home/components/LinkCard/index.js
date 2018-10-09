@@ -13,7 +13,7 @@ export default class LinkCard extends React.Component {
   handleClick = (e) => {
     e.preventDefault();
 
-    window.location.href = link;
+    window.location.href = this.props.link;
   };
   render() {
     const { key, name, backgroundColor, icon, link, dummy } = this.props;
