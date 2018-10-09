@@ -56,12 +56,12 @@ class Section {
       function professorWhere() {
         let where = {};
 
-        if (!_.isNil(queryParams['professorFirstName'])) {
-          where.firstName = queryParams['professorFirstName'].trim();
+        if (!_.isNil(queryParams['firstName'])) {
+          where.firstName = queryParams['firstName'].trim();
         }
 
-        if (!_.isNil(queryParams['professorLastName'])) {
-          where.lastName = queryParams['professorLastName'].trim();
+        if (!_.isNil(queryParams['lastName'])) {
+          where.lastName = queryParams['lastName'].trim();
         }
 
         return where;
