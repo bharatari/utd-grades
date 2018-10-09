@@ -20,6 +20,12 @@ service: nlp
 provider:
   name: aws
   runtime: python3.6
+  profile: utd-grades
+  region: us-east-2
+  stage: production
+  stackTags:
+    environment: production
+    project: utd-grades
 
 # you can overwrite defaults here
 #  stage: dev
