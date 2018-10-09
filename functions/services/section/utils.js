@@ -5,7 +5,6 @@ const lambda = new AWS.Lambda({
   region: 'us-east-2',
 });
 
-
 module.exports = {
   async parseSearchStringIfExists(queryParams) {
     if (queryParams) {
