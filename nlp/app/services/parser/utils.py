@@ -17,14 +17,34 @@ def parse_search_string(search_string):
 
   params = {}
   
-  prefix = prefix.group(0)
-  number = number.group(0)
-  year = year.group(0)
-  semester = semester.group(0)
-  section = section.group(0)
+  professor = search_string
 
-  professor = search_string.replace(prefix, '').replace(number, '').replace(year, '') \
-    .replace(semester, '').replace(section, '').replace('.', '').strip()
+  if prefix:
+    prefix = prefix.group(0)
+
+    professor = professor.replace(prefix, '')
+  
+  if number:
+    number = number.group(0)
+
+    professor = professor.replace(number, '')
+
+  if year:
+    year = year.group(0)
+
+    professor = professor.replace(year, '')
+  
+  if semester:
+    semester = semester.group(0)
+
+    professor = professor.replace(semester, '')
+
+  if section:
+    section = section.group(0)
+
+    professor = professor.replace(section, '')
+
+  professor = professor.replace('.', '').strip()
 
   if professor:
     if ',' in professor:
