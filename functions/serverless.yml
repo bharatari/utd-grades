@@ -37,6 +37,11 @@ provider:
     dbUser: ${self:custom.dbConfig.dbUser}
     dbPass: ${self:custom.dbConfig.dbPass}
     dbHost: ${self:custom.dbConfig.dbHost}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: "*"
 
 # you can overwrite defaults here
 #  stage: dev

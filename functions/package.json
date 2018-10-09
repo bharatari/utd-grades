@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
+    "aws-sdk": "^2.330.0",
     "lodash": "^4.17.11",
     "pg": "^7.5.0",
     "sequelize": "^4.39.0"
