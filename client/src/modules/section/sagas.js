@@ -1,13 +1,14 @@
 import data from 'utils/data';
 import { all, put, take, call, takeLatest, throttle } from 'redux-saga/effects';
 import * as actions from './actions';
-import parse from 'utils/parser';
 
 export function* fetchSections(action) {
   yield put(actions.requestSections());
 
-  const params = parse.parseSearchString(action.payload);
-  console.log(params);
+  const params = {
+    search: action.payload
+  };
+
   try {
     const response = yield call(data.request.bind(data), 'section', 'get', null, params);
 
