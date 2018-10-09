@@ -1,5 +1,8 @@
 const init = require('../../models');
 const _ = require('lodash');
+const Sequelize = require('sequelize');
+
+const Op = Sequelize.Op;
 
 class Section {
   constructor(sequelize) {
@@ -57,11 +60,19 @@ class Section {
         let where = {};
 
         if (!_.isNil(queryParams['firstName'])) {
-          where.firstName = queryParams['firstName'].trim();
+          const firstName = queryParams['firstName'].trim();
+
+          where.firstName = {
+            [Op.iLike]: `%${firstName}%`
+          };
         }
 
         if (!_.isNil(queryParams['lastName'])) {
-          where.lastName = queryParams['lastName'].trim();
+          const lastName = queryParams['lastName'].trim();
+
+          where.lastName = {
+            [Op.iLike]: `%${lastName}%`
+          };
         }
 
         return where;
