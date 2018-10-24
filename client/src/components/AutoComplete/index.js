@@ -15,7 +15,7 @@ export default class AutoComplete extends React.Component {
     this.props.onBlur(value);
   };
   render() {
-    const { data, placeholder, value } = this.props;
+    const { data, placeholder, value, onSelect } = this.props;
 
     let children = null;
 
@@ -27,7 +27,8 @@ export default class AutoComplete extends React.Component {
 
     return (
       <Complete className={this.props.classes} size="large" value={value} dataSource={data}
-        children={children} onSearch={this.handleSearch} placeholder={placeholder} onChange={this.handleChange} />
+        children={children} onSearch={this.handleSearch} placeholder={placeholder} onChange={this.handleChange}
+        onSelect={onSelect} />
     );
   }
 }
