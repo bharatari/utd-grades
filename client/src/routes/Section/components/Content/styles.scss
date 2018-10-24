@@ -31,3 +31,10 @@
 .otherSectionsRow {
   padding-top: 50px;
 }
+
+.sectionsContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  align-content: flex-start;
+}

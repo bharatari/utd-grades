@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
   history: ownProps.history,
   match: ownProps.match,
   section: normalizedSectionSelector(state),
+  otherSections: state.section.fetchOtherSections.sections,
 });
 
 const actionCreators = {

@@ -11,6 +11,11 @@ const initialState = {
     section: null,
     error: null,
   },
+  fetchOtherSections: {
+    requesting: false,
+    sections: null,
+    error: null,
+  },
 };
 
 export default handleActions({
@@ -38,6 +43,37 @@ export default handleActions({
         ...state,
         fetchSections: {
           ...state.fetchSections,
+          requesting: false,
+          sections: null,
+          error: action.payload,
+        },
+      };
+    }
+  },
+  REQUEST_OTHER_SECTIONS: (state, action) => ({
+    ...state,
+    fetchOtherSections: {
+      ...state.fetchOtherSections,
+      requesting: true,
+    },
+  }),
+  RECEIVE_OTHER_SECTIONS: {
+    next(state, action) {
+      return {
+        ...state,
+        fetchOtherSections: {
+          ...state.fetchOtherSections,
+          requesting: false,
+          sections: action.payload,
+          error: null,
+        },
+      };
+    },
+    throw(state, action) {
+      return {
+        ...state,
+        fetchOtherSections: {
+          ...state.fetchOtherSections,
           requesting: false,
           sections: null,
           error: action.payload,

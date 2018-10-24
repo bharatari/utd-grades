@@ -21,6 +21,25 @@ export function* fetchSections(action) {
   }
 }
 
+export function* fetchOtherSections(action) {
+  yield put(actions.requestOtherSections());
+
+  const params = {
+    courseNumber: action.payload.number,
+    coursePrefix: action.payload.prefix,
+  };
+
+  try {
+    yield call(delay, 2000);
+
+    const response = yield call(data.request.bind(data), 'section', 'get', null, params);
+
+    yield put(actions.receiveOtherSections(response));
+  } catch (e) {
+    yield put(actions.receiveOtherSections(e));
+  }
+}
+
 export function* fetchSection(action) {
   yield put(actions.requestSection());
 
@@ -36,6 +55,7 @@ export function* fetchSection(action) {
 export function* rootSaga() {
   yield all([
     takeLatest(actions.fetchSections, fetchSections),
+    takeLatest(actions.fetchOtherSections, fetchOtherSections),
     takeLatest(actions.fetchSection, fetchSection),
   ]);
 }

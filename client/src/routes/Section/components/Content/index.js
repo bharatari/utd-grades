@@ -1,7 +1,8 @@
 import React from 'react';
 import classes from './styles.scss';
 import { Core, Graph } from 'components/';
-import { Row, Col, Card, Icon, Popover } from 'antd';
+import { Row, Col, Icon, Popover } from 'antd';
+import { SectionCard } from '../';
 
 export default class Content extends React.Component {
   transformData = (grades) => {
@@ -131,6 +132,14 @@ export default class Content extends React.Component {
     return data;
   };
   render() {
+    const otherSections = () => {
+      if (this.props.otherSections) {
+        return this.props.otherSections.map((section) => <SectionCard key={section.name} section={section} backgroundColor="darkgray" />)
+      }
+      
+      return null;
+    };
+
     return (
       <div>
         <Row>
@@ -146,7 +155,9 @@ export default class Content extends React.Component {
 
         <Row className={classes.otherSectionsRow}>
           <p className={classes.otherSectionsHeader}>Other Sections</p>
-          
+          <div className={classes.sectionsContainer}>
+            {otherSections()}
+          </div>
         </Row>
       </div>
     );
