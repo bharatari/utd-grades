@@ -10,7 +10,7 @@ export default {
   },
   buildSectionName(section) {
     if (section) {
-      const name = `${section.course.prefix} ${section.course.number}.${section.number} - ${section.professor.firstName} ${section.professor.lastName}`;
+      const name = `${section.course.prefix} ${section.course.number}.${section.number} - ${section.professor.firstName} ${section.professor.lastName} (${section.course.semester.name})`;
 
       section.name = name;
     }
