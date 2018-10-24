@@ -1,5 +1,6 @@
 import data from 'utils/data';
 import { all, put, take, call, takeLatest, throttle } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import * as actions from './actions';
 
 export function* fetchSections(action) {
@@ -10,6 +11,8 @@ export function* fetchSections(action) {
   };
 
   try {
+    yield call(delay, 2000);
+
     const response = yield call(data.request.bind(data), 'section', 'get', null, params);
 
     yield put(actions.receiveSections(response));
@@ -32,7 +35,7 @@ export function* fetchSection(action) {
 
 export function* rootSaga() {
   yield all([
-    throttle(1000, actions.fetchSections, fetchSections),
+    takeLatest(actions.fetchSections, fetchSections),
     takeLatest(actions.fetchSection, fetchSection),
   ]);
 }
