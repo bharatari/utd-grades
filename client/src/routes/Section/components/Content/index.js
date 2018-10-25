@@ -1,144 +1,31 @@
 import React from 'react';
 import classes from './styles.scss';
 import { Core, Graph } from 'components/';
-import { Row, Col, Icon, Popover } from 'antd';
+import { Row, Col, Icon, Popover, Spin } from 'antd';
 import { SectionCard } from '../';
+import _ from 'lodash';
+import general from 'utils/general';
 
 export default class Content extends React.Component {
   transformData = (grades) => {
-    let data = [];
+    const objectArray = general.convertAssociatedArrayToObjectArray(grades);
+    const sortedGrades = general.sortByGrades(objectArray);
+    const { keys, values } = general.splitData(sortedGrades);
 
-    const colors = {
-      'A': 'hsl(246, 70%, 50%)',
-      'B': 'hsl(338, 70%, 50%)',
-      'C': 'hsl(204, 70%, 50%)',
-      'D': 'hsl(350, 70%, 50%)',
-      'F': 'hsl(199, 70%, 50%)',
-      'W': 'hsl(356, 70%, 50%)',
-    };
+    console.log(sortedGrades);
 
-    if (grades['A+']) {
-      data.push({
-        grade: 'A+',
-        count: parseInt(grades['A+']),
-        color: 'hsl(246, 70%, 50%)',
-      });
-    }
-
-    if (grades['A']) {
-      data.push({
-        grade: 'A',
-        count: parseInt(grades['A']),
-        color: 'hsl(338, 70%, 50%)',
-      });
-    }
-
-    if (grades['A-']) {
-      data.push({
-        grade: 'A-',
-        count: parseInt(grades['A-']), 
-        color: 'hsl(204, 70%, 50%)',
-      });
-    }
-
-    if (grades['B+']) {
-      data.push({
-        grade: 'B+',
-        count: parseInt(grades['B+']),
-        color: 'hsl(350, 70%, 50%)',
-      });
-    }
-
-    if (grades['B']) {
-      data.push({
-        grade: 'B',
-        count: parseInt(grades['B']),
-        color: 'hsl(199, 70%, 50%)',
-      });
-    }
-
-    if (grades['B-']) {
-      data.push({
-        grade: 'B-',
-        count: parseInt(grades['B-']),
-        color: 'hsl(356, 70%, 50%)',
-      });
-    }
-
-    if (grades['C+']) {
-      data.push({
-        grade: 'C+',
-        count: parseInt(grades['C+']),
-        color: '',
-      });
-    }
-
-    if (grades['C']) {
-      data.push({
-        grade: 'C',
-        count: parseInt(grades['C']),
-        color: '',
-      });
-    }
-
-    if (grades['C-']) {
-      data.push({
-        grade: 'C-',
-        count: parseInt(grades['C-']),
-        color: '',
-      });
-    }
-
-    if (grades['D+']) {
-      data.push({
-        grade: 'D+',
-        count: parseInt(grades['D+']),
-        color: '',
-      });
-    }
-
-    if (grades['D']) {
-      data.push({
-        grade: 'D',
-        count: parseInt(grades['D']),
-        color: '',
-      });
-    }
-
-    if (grades['D-']) {
-      data.push({
-        grade: 'D-',
-        count: parseInt(grades['D-']),
-        color: '',
-      });
-    }
-
-    if (grades['F']) {
-      data.push({
-        grade: 'F',
-        count: parseInt(grades['F']),
-        color: '',
-      });
-    }
-
-    if (grades['W']) {
-      data.push({
-        grade: 'W',
-        count: parseInt(grades['W']),
-        color: '',
-      });
-    }
-
-    return data;
+    return { keys, values };
   };
   render() {
     const otherSections = () => {
       if (this.props.otherSections) {
-        return this.props.otherSections.map((section) => <SectionCard key={section.name} section={section} backgroundColor="darkgray" />)
+        return this.props.otherSections.map((section) => <SectionCard key={section.id} section={section} backgroundColor="rgb(57, 57, 57)" history={this.props.history} />)
       }
       
-      return null;
+      return <Spin />;
     };
+
+    const { keys, values } = this.transformData(this.props.section.grades);
 
     return (
       <div>
@@ -149,7 +36,8 @@ export default class Content extends React.Component {
 
         <Row>
           <div className={classes.graphContainer}>
-            <Graph type="bar" data={{ labels: ['A', 'B'], datasets: [{ backgroundColor: 'hsl(350, 70%, 50%)', data: [1,2] }]}} />
+            <Graph type="bar" data={{ labels: keys, datasets: [{ backgroundColor: 'hsl(350, 70%, 50%)', data: values }]}}
+              options={{ legend: { display: false } }} />
           </div>
         </Row>
 
@@ -157,6 +45,9 @@ export default class Content extends React.Component {
           <p className={classes.otherSectionsHeader}>Other Sections</p>
           <div className={classes.sectionsContainer}>
             {otherSections()}
+            <SectionCard dummy />
+            <SectionCard dummy />
+            <SectionCard dummy />
           </div>
         </Row>
       </div>

@@ -13,7 +13,7 @@ export default class SectionCard extends React.Component {
   handleClick = (e) => {
     e.preventDefault();
 
-    window.location.href = this.props.link;
+    this.props.history.push(`/app/section/${this.props.section.id}`);
   };
   render() {
     const { section, dummy, backgroundColor } = this.props;
@@ -27,7 +27,8 @@ export default class SectionCard extends React.Component {
     return (
       <SlideUp {...this.props} startAt={100}>
         <div className={classes.card} style={{ backgroundColor }} onClick={this.handleClick}>
-          <p className={classes.name}>{section.number}</p>
+          <p className={classes.name}>{section.course.prefix} {section.course.number}.{section.number}</p>
+          <p className={classes.professor}>{section.professor.firstName} {section.professor.lastName}</p>
         </div>
       </SlideUp>
     );

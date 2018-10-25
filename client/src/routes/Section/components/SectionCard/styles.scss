@@ -52,9 +52,16 @@
   transition: all 300ms ease-out;
 }
 
+.professor {
+  color: white;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  margin-top: -15px;
+}
+
 @media (min-width: 2133px) {
   .dummy {
-    display: none;
+    /*display: none;*/
   }
 }
 

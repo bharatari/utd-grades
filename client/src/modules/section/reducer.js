@@ -114,4 +114,31 @@ export default handleActions({
       };
     }
   },
+  RESET_SECTIONS: (state, action) => ({
+    ...state,
+    fetchSections: {
+      ...state.fetchSections,
+      requesting: false,
+      sections: null,
+      error: null,
+    },
+  }),
+  RESET_OTHER_SECTIONS: (state, action) => ({
+    ...state,
+    fetchOtherSections: {
+      ...state.fetchOtherSections,
+      requesting: false,
+      sections: null,
+      error: null,
+    },
+  }),
+  RESET_SECTION: (state, action) => ({
+    ...state,
+    fetchSection: {
+      ...state.fetchSection,
+      requesting: false,
+      section: null,
+      error: null,
+    },
+  }),
 }, initialState);

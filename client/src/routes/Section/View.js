@@ -2,12 +2,14 @@ import React from 'react';
 import classes from './styles.scss';
 import { Core } from 'components/';
 import { Content } from './components';
-import { Row, Col, Card, Icon, Popover } from 'antd';
+import { Row, Col, Card, Icon, Popover, Spin } from 'antd';
 
 export default class SectionView extends React.Component {
   componentDidMount() {
+    this.props.actions.resetSection();
+    this.props.actions.resetOtherSections();
+
     this.props.actions.fetchSection(this.props.match.params.id);
-    
   }
   componentDidUpdate(prevProps) {
     if (this.props.section && !prevProps.section) {
@@ -16,7 +18,17 @@ export default class SectionView extends React.Component {
         prefix: this.props.section.course.prefix,
       });
     }
+    
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.init();
+    }
   }
+  init = () => {
+    this.props.actions.resetSection();
+    this.props.actions.resetOtherSections();
+
+    this.props.actions.fetchSection(this.props.match.params.id);
+  };
   goBack = () => {
     this.props.history.replace('/');
   };
@@ -33,7 +45,7 @@ export default class SectionView extends React.Component {
         <div className={classes.content}>
           <Row>
             <Col lg={{ span: 12, offset: 6 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
-              { this.props.section ? <Content section={this.props.section} otherSections={this.props.otherSections} /> : null }
+              { this.props.section ? <Content section={this.props.section} otherSections={this.props.otherSections} history={this.props.history} /> : <Spin /> }
             </Col>
           </Row>
         </div>

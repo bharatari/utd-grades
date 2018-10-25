@@ -7,8 +7,8 @@ export default class Graph extends React.Component {
     this.initializeChart(this.props);
   }
   componentWillReceiveProps(nextProps) {
-    this.destroyChart();
-    this.initializeChart(nextProps);
+    //this.destroyChart();
+    //this.initializeChart(nextProps);
   }
   componentWillUnmount() {
     this.destroyChart();
