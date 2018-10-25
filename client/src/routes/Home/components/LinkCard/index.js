@@ -16,7 +16,7 @@ export default class LinkCard extends React.Component {
     window.location.href = this.props.link;
   };
   render() {
-    const { key, name, backgroundColor, icon, link, dummy } = this.props;
+    const { name, backgroundColor, icon, link, dummy } = this.props;
 
     if (dummy) {
       return (
