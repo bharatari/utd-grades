@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './styles.scss';
 import { Core } from 'components/';
 import { Content } from './components';
-import { Row, Col, Card, Icon, Popover, Spin } from 'antd';
+import { Button, Row, Col, Card, Icon, Popover, Spin } from 'antd';
 
 export default class SectionView extends React.Component {
   componentDidMount() {
@@ -29,17 +29,15 @@ export default class SectionView extends React.Component {
 
     this.props.actions.fetchSection(this.props.match.params.id);
   };
-  goBack = () => {
-    this.props.history.replace('/');
+  goHome = () => {
+    this.props.history.push('/');
   };
   render() {
     return (
       <Core>
         <Row className={classes.menu}>
-          <button className={classes.back} onClick={this.goBack}>
-            <Icon type="arrow-left" style={{ fontSize: '24px' }}  />
-          </button>
-          <h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2>
+          <Button className={classes.back} onClick={this.goHome} type="ghost" shape="circle" icon="home" size="large" />
+          <a href="javascript:void(0)" onClick={this.goHome}><h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2></a>
         </Row>
         
         <div className={classes.content}>
