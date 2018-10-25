@@ -30,7 +30,7 @@ export function* fetchOtherSections(action) {
   };
 
   try {
-    yield call(delay, 2000);
+    yield call(delay, 500);
 
     const response = yield call(data.request.bind(data), 'section', 'get', null, params);
 
