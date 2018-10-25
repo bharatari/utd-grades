@@ -16,7 +16,7 @@ function Core({ children }) {
       </div>
       <div className={classes.footer}>
         <p>Built with <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" /> by <a href="https://www.acmutd.co">ACM Labs</a> and powered <Icon type="thunderbolt" theme="twoTone" twoToneColor="#ffcc00" /> by <a href="https://www.utdmercury.com">The Mercury</a>.</p>
-        <p>Designed by <a href="https://www.arimilli.io">Bharat Arimilli</a>. Thanks to Garrett Gu, Jeffrey Wang, Joseph Wickline and our <Popover content={donors}><span style={{ textDecoration: 'underline' }}>donors</span>.</Popover></p>
+        <p>Designed by <a href="https://www.arimilli.io">Bharat Arimilli</a>. Thanks to <a href="https://garrettgu.com/">Garrett Gu</a>, <a href="https://jeffw.xyz/">Jeffrey Wang</a>, <a href="https://www.linkedin.com/in/josephwickline/">Joseph Wickline</a> and our <Popover content={donors}><span style={{ textDecoration: 'underline' }}>donors</span>.</Popover></p>
       </div>
     </div>
   );
