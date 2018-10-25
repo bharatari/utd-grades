@@ -7,6 +7,18 @@ import _ from 'lodash';
 import general from 'utils/general';
 
 export default class Content extends React.Component {
+  state = {
+    options: { 
+      legend: { display: false },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          },
+        }],
+      },
+    },
+  };
   transformData = (grades) => {
     const objectArray = general.convertAssociatedArrayToObjectArray(grades);
     const sortedGrades = general.sortByGrades(objectArray);
@@ -38,8 +50,7 @@ export default class Content extends React.Component {
 
         <Row>
           <div className={classes.graphContainer}>
-            <Graph type="bar" data={{ labels: keys, datasets: [{ backgroundColor: colors, data: values }]}}
-              options={{ legend: { display: false } }} />
+            <Graph type="bar" data={{ labels: keys, datasets: [{ backgroundColor: colors, data: values }]}} options={this.state.options} />
           </div>
         </Row>
 
