@@ -19,7 +19,10 @@ export default class Content extends React.Component {
   render() {
     const otherSections = () => {
       if (this.props.otherSections) {
-        return this.props.otherSections.map((section) => <SectionCard key={section.id} section={section} backgroundColor="rgb(57, 57, 57)" history={this.props.history} />)
+        return this.props.otherSections.map((section) => (
+          <SectionCard key={section.id} section={section} backgroundColor="rgb(57, 57, 57)" history={this.props.history}
+            currentSectionId={this.props.section.id} />
+        ))
       }
       
       return <Spin />;

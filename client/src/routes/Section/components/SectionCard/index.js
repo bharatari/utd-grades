@@ -16,12 +16,16 @@ export default class SectionCard extends React.Component {
     this.props.history.push(`/app/section/${this.props.section.id}`);
   };
   render() {
-    const { section, dummy, backgroundColor } = this.props;
+    const { section, dummy, backgroundColor, currentSectionId } = this.props;
 
     if (dummy) {
       return (
         <div className={dummyItem}></div>
       );
+    }
+
+    if (currentSectionId === section.id) {
+      return null;
     }
 
     return (
