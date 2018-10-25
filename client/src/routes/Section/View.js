@@ -36,8 +36,8 @@ export default class SectionView extends React.Component {
     return (
       <Core>
         <Row className={classes.menu}>
-          <button className={classes.back}>
-            <Icon type="arrow-left" style={{ fontSize: '24px' }} onClick={this.goBack} />
+          <button className={classes.back} onClick={this.goBack}>
+            <Icon type="arrow-left" style={{ fontSize: '24px' }}  />
           </button>
           <h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2>
         </Row>
