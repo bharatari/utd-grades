@@ -36,6 +36,13 @@
 .sectionsContainer {
   display: flex;
   justify-content: space-between;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-content: flex-start;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sectionsContainer::-webkit-scrollbar {
+  /* This could be problematic */
+  display: none;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './styles.scss';
 import { Core, Graph } from 'components/';
-import { Row, Col, Icon, Popover, Spin } from 'antd';
+import { Row, Col, Icon, Popover, Spin, Carousel } from 'antd';
 import { SectionCard } from '../';
 import _ from 'lodash';
 import general from 'utils/general';
@@ -34,7 +34,7 @@ export default class Content extends React.Component {
       <div>
         <Row>
           <h3 className={classes.header}>{this.props.section.course.prefix} {this.props.section.course.number}<span className={classes.section}>.{this.props.section.number}</span></h3>
-          <h5 className={classes.subheader}>{this.props.section.professor.lastName}, {this.props.section.professor.firstName}</h5>
+          <h5 className={classes.subheader}>{this.props.section.professor.lastName}, {this.props.section.professor.firstName} - {this.props.section.course.semester.name}</h5>
         </Row>
 
         <Row>
@@ -48,9 +48,6 @@ export default class Content extends React.Component {
           <p className={classes.otherSectionsHeader}>Other Sections</p>
           <div className={classes.sectionsContainer}>
             {otherSections()}
-            <SectionCard dummy />
-            <SectionCard dummy />
-            <SectionCard dummy />
           </div>
         </Row>
       </div>

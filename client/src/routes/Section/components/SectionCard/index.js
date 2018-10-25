@@ -32,7 +32,7 @@ export default class SectionCard extends React.Component {
       <SlideUp {...this.props} startAt={100}>
         <div className={classes.card} style={{ backgroundColor }} onClick={this.handleClick}>
           <p className={classes.name}>{section.course.prefix} {section.course.number}.{section.number}</p>
-          <p className={classes.professor}>{section.professor.firstName} {section.professor.lastName}</p>
+          <p className={classes.professor}>{section.professor.firstName} {section.professor.lastName} - {this.props.section.course.semester.name}</p>
         </div>
       </SlideUp>
     );

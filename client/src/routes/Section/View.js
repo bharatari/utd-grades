@@ -45,7 +45,11 @@ export default class SectionView extends React.Component {
         <div className={classes.content}>
           <Row>
             <Col lg={{ span: 12, offset: 6 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
-              { this.props.section ? <Content section={this.props.section} otherSections={this.props.otherSections} history={this.props.history} /> : <Spin /> }
+              {
+                this.props.section
+                ? <Content section={this.props.section} otherSections={this.props.otherSections} history={this.props.history} />
+                : <Spin className={classes.spinner} /> 
+              }
             </Col>
           </Row>
         </div>
