@@ -11,10 +11,9 @@ export default class Content extends React.Component {
     const objectArray = general.convertAssociatedArrayToObjectArray(grades);
     const sortedGrades = general.sortByGrades(objectArray);
     const { keys, values } = general.splitData(sortedGrades);
+    const colors = general.getColors(keys);
 
-    console.log(sortedGrades);
-
-    return { keys, values };
+    return { keys, values, colors };
   };
   render() {
     const otherSections = () => {
@@ -28,7 +27,7 @@ export default class Content extends React.Component {
       return <Spin />;
     };
 
-    const { keys, values } = this.transformData(this.props.section.grades);
+    const { keys, values, colors } = this.transformData(this.props.section.grades);
 
     return (
       <div>
@@ -39,7 +38,7 @@ export default class Content extends React.Component {
 
         <Row>
           <div className={classes.graphContainer}>
-            <Graph type="bar" data={{ labels: keys, datasets: [{ backgroundColor: 'hsl(350, 70%, 50%)', data: values }]}}
+            <Graph type="bar" data={{ labels: keys, datasets: [{ backgroundColor: colors, data: values }]}}
               options={{ legend: { display: false } }} />
           </div>
         </Row>
