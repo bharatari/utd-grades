@@ -12,13 +12,10 @@ import { normalizedSectionsSelector } from 'modules/section/selectors';
 const mapStateToProps = (state, ownProps) => ({
   location: ownProps.location,
   history: ownProps.history,
-  sections: normalizedSectionsSelector(state),
-  loading: state.section.fetchSections.requesting,
 });
 
 const actionCreators = {
   ...section,
-  submit,
 };
 
 const localActionCreators = {

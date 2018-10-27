@@ -11,8 +11,6 @@ export function* fetchSections(action) {
   };
 
   try {
-    yield call(delay, 2000);
-
     const response = yield call(data.request.bind(data), 'section', 'get', null, params);
 
     yield put(actions.receiveSections(response));

@@ -1,11 +1,11 @@
 import React from 'react';
 import classes from './styles.scss';
 import { Field, reduxForm } from 'redux-form';
-import { Form, Popover } from 'antd';
+import { Form, Popover, Input } from 'antd';
 import { AutoComplete } from 'components/';
 
 const renderField = ({ input, ...props }) => (
-  <AutoComplete {...input} {...props} />
+  <Input {...input} {...props} />
 );
 
 class HomeForm extends React.Component {
@@ -26,8 +26,7 @@ class HomeForm extends React.Component {
 
     return (
       <Form onSubmit={handleSubmit}>
-        <Field name="id" classes={classes.input} data={sections} placeholder="ex. CS 1337 Fall 2017 Smith"
-          component={renderField} onSearch={onSearch} uniqueKey="id" labelKey="name" onSelect={onSelect} />
+        <Field name="search" size="large" className={classes.input} placeholder="ex. CS 1337 Fall 2017 Smith" component={renderField} />
         <Popover content={content} className={classes.hint} placement="bottom">
           <span style={{ textAlign: 'center' }}>
             Need to know what you can enter? <span style={{ textDecoration: 'underline' }}>Pretty much anything.</span>

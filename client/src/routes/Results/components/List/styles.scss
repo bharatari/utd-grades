@@ -1,0 +1,22 @@
+.item {
+  padding-left: 20px;
+  border-right: 1px solid #e8e8e8;
+  cursor: pointer;
+  transition: all 300ms ease-out;
+}
+
+.item:hover {
+  background-color: #fcfcfc;
+}
+
+.selected {
+  border-right: 6px solid rgb(0, 116, 224) !important;
+  box-shadow: inset -5px 0px 10px rgba(0, 0, 0, 0.05);
+  background-color: #fcfcfc;
+}
+
+.loadingItem {
+  padding-left: 20px;
+  padding-top: 20px;
+  border: none !important;
+}
