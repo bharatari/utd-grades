@@ -28,6 +28,9 @@ export default class SectionView extends React.Component {
 
     if (this.props.search) {
       if (this.props.search !== prevProps.search) {
+        this.props.actions.resetSections();
+        this.resetSection();
+
         this.props.actions.fetchSections(this.props.search);
       }
     }
@@ -46,6 +49,11 @@ export default class SectionView extends React.Component {
         prefix: this.props.section.course.prefix,
       });
     }    
+  };
+  resetSection = () => {
+    this.props.actions.resetSection();
+
+    queryUtils.deleteQueryParam(this.props.location, this.props.history, 'section');
   };
   goHome = () => {
     this.props.history.push('/');

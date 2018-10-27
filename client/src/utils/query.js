@@ -24,9 +24,22 @@ export default {
       ...newParams,
     };
 
-    return qstring.stringify(queryParams);
+    return this.stringifyQueryParams(queryParams);
   },
   parseQueryParams(queryString) {
     return qstring.parse(queryString);
+  },
+  stringifyQueryParams(queryParams) {
+    return qstring.stringify(queryParams);
+  },
+  deleteQueryParam(location, history, key) {
+    const queryParams = this.parseQueryParams(location.search);
+
+    delete queryParams[key];
+
+    history.push({
+      pathname: location.pathname,
+      search: this.stringifyQueryParams(queryParams),
+    });
   }
 }
