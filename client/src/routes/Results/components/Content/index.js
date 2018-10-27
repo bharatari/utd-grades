@@ -22,7 +22,7 @@ export default class Content extends React.Component {
         mode: 'single',
         callbacks: {
           label: (tooltipItems, data) => {
-            const { keys, values, colors } = this.transformData(this.props.section.grades);
+            const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(this.props.section.grades));
             const total = _.sum(values);
 
             let text = [`Students: ${tooltipItems.yLabel}`];
@@ -50,7 +50,7 @@ export default class Content extends React.Component {
       if (this.props.otherSections) {
         return this.props.otherSections.map((section) => (
           <SectionCard key={section.id} section={section} backgroundColor="rgb(57, 57, 57)" history={this.props.history}
-            currentSectionId={this.props.section.id} />
+            currentSectionId={this.props.section.id} location={this.props.location} />
         ))
       }
       

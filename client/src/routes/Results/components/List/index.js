@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classes from './styles.scss';
 import classNames from 'classnames';
 import { List, Spin, Icon } from 'antd';
+import general from 'utils/general';
 
 const IconText = ({ type, text }) => (
   <span>
@@ -19,6 +21,7 @@ export default class ResultsList extends React.Component {
           size="large"
           pagination={{
             pageSize: 8,
+            className: classes.pagination,
           }}
           dataSource={this.props.data}
           renderItem={item => {
@@ -26,14 +29,15 @@ export default class ResultsList extends React.Component {
               classes.item,
               { [classes.selected]: item.id == this.props.id }
             );
-            console.log(this.props.id)
-            console.log(item.id)
 
+            const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(item.grades));
+            const total = _.sum(values);
+            
             return (
               <List.Item
                 key={item.id}
                 className={itemClasses}
-                actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
+                actions={[<IconText type="user" text={total} />]}
                 onClick={() => this.props.onClick(item.id)}>
                 <List.Item.Meta
                   title={<a href="javascript:void(0)">{item.course.prefix} {item.course.number}.{item.number}</a>}

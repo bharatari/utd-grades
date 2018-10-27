@@ -39,4 +39,5 @@ class HomeForm extends React.Component {
 
 export default reduxForm({
   form: 'homeForm',
+  destroyOnUnmount: false,
 })(HomeForm);
