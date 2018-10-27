@@ -14,40 +14,51 @@ const IconText = ({ type, text }) => (
 
 export default class ResultsList extends React.Component {
   render() {
-    if (this.props.data) {
-      return (
-        <List
-          itemLayout="vertical"
-          size="large"
-          pagination={{
-            pageSize: 8,
-            className: classes.pagination,
-          }}
-          dataSource={this.props.data}
-          renderItem={item => {
-            const itemClasses = classNames(
-              classes.item,
-              { [classes.selected]: item.id == this.props.id }
-            );
+    const empty = (
+      <div className={classes.emptyContainer}>
+        <Icon className={classes.icon} type="frown" theme="twoTone" />
+        <p className={classes.error}>We weren't able to find that. Try searching for something else!</p>
+      </div>
+    );
 
-            const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(item.grades));
-            const total = _.sum(values);
-            
-            return (
-              <List.Item
-                key={item.id}
-                className={itemClasses}
-                actions={[<IconText type="user" text={total} />]}
-                onClick={() => this.props.onClick(item.id)}>
-                <List.Item.Meta
-                  title={<a href="javascript:void(0)">{item.course.prefix} {item.course.number}.{item.number}</a>}
-                  description={`${item.professor.lastName}, ${item.professor.firstName} - ${item.course.semester.name}`}
-                />
-              </List.Item>
-            );
-          }}
-        />
-      );
+    if (this.props.data) {
+      if (this.props.data.length < 1) {
+        return empty;
+      } else {
+        return (
+          <List
+            itemLayout="vertical"
+            size="large"
+            pagination={{
+              pageSize: 8,
+              className: classes.pagination,
+            }}
+            dataSource={this.props.data}
+            renderItem={item => {
+              const itemClasses = classNames(
+                classes.item,
+                { [classes.selected]: item.id == this.props.id }
+              );
+  
+              const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(item.grades));
+              const total = _.sum(values);
+              
+              return (
+                <List.Item
+                  key={item.id}
+                  className={itemClasses}
+                  actions={[<IconText type="user" text={total} />]}
+                  onClick={() => this.props.onClick(item.id)}>
+                  <List.Item.Meta
+                    title={<a href="javascript:void(0)">{item.course.prefix} {item.course.number}.{item.number}</a>}
+                    description={`${item.professor.lastName}, ${item.professor.firstName} - ${item.course.semester.name}`}
+                  />
+                </List.Item>
+              );
+            }}
+          />
+        );
+      }
     } else if (this.props.loading) {
       return (
         <List

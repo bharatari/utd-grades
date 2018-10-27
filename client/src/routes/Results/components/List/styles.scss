@@ -24,3 +24,24 @@
 .pagination {
   margin-right: 10px !important;
 }
+
+.emptyContainer {
+  padding: 30px;
+}
+
+.icon {
+  font-size: 42px;
+  width: 43px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block !important;
+}
+
+.error {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-size: 22px;
+  text-align: center;
+  color: #a4a4a4;
+  font-weight: 300;
+}
