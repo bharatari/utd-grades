@@ -4,13 +4,15 @@ import { Field, reduxForm } from 'redux-form';
 import { Form, Popover, Input } from 'antd';
 import { AutoComplete } from 'components/';
 
+const Search = Input.Search;
+
 const renderField = ({ input, ...props }) => (
-  <Input {...input} {...props} />
+  <Search {...input} {...props} />
 );
 
 class HomeForm extends React.Component {
   render() {
-    const { handleSubmit, sections, onSearch, pristine, reset, submitting, onSelect } = this.props;
+    const { handleSubmit, onSearch, pristine, reset, submitting } = this.props;
     const content = (
       <div>
         <p>You can search for:</p>
@@ -26,7 +28,8 @@ class HomeForm extends React.Component {
 
     return (
       <Form onSubmit={handleSubmit}>
-        <Field name="search" size="large" className={classes.input} placeholder="ex. CS 1337 Fall 2017 Smith" component={renderField} />
+        <Field name="search" size="large" className={classes.input} placeholder="ex. CS 1337 Fall 2017 Smith" component={renderField}
+          onSearch={onSearch} />
         <Popover content={content} className={classes.hint} placement="bottom">
           <span style={{ textAlign: 'center' }}>
             Need to know what you can enter? <span style={{ textDecoration: 'underline' }}>Pretty much anything.</span>

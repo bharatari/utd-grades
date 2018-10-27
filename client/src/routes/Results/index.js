@@ -5,6 +5,7 @@ import View from './View';
 import * as section from 'modules/section/actions';
 import { normalizedSectionsSelector, normalizedSectionSelector } from 'modules/section/selectors';
 import { searchSelector, sectionSelector } from './modules/selectors';
+import { submit } from 'redux-form';
 
 const mapStateToProps = (state, ownProps) => ({
   location: ownProps.location,
@@ -21,6 +22,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const actionCreators = {
   ...section,
+  submit,
 };
 
 const mapDispatchToProps = (dispatch) => ({

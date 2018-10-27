@@ -16,6 +16,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const actionCreators = {
   ...section,
+  submit,
 };
 
 const localActionCreators = {

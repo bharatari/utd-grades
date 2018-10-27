@@ -15,6 +15,9 @@ export default class HomeView extends React.Component {
       { name: 'Coursebook', backgroundColor: '#69BE28', link: 'https://coursebook.utdallas.edu' },
     ],
   };
+  handleSearch = () => {
+    this.props.actions.submit('homeForm');
+  };
   handleSubmit = (values) => {
     queryUtils.pushQueryParamsToURL(this.props.location, this.props.history, {
       search: values.search
@@ -29,7 +32,7 @@ export default class HomeView extends React.Component {
               <h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2>
               
               <p className={classes.description}>See how students did in any given class. And it's <strong>free, forever.</strong></p>
-              <Form onSubmit={this.handleSubmit} />
+              <Form onSubmit={this.handleSubmit} onSearch={this.handleSearch} />
             </Col>
           </Row>
           <Row className={classes.quickLinksContainer}>

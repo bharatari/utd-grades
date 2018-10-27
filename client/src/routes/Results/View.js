@@ -7,6 +7,11 @@ import queryUtils from 'utils/query';
 import { Element, scroller, animateScroll as scroll } from 'react-scroll';
 
 export default class SectionView extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.graphRef = React.createRef();
+  }
   componentDidMount() {
     this.props.actions.resetSections();
     this.props.actions.resetSection();
@@ -45,21 +50,20 @@ export default class SectionView extends React.Component {
   goHome = () => {
     this.props.history.push('/');
   };
+  handleSearch = () => {
+    this.props.actions.submit('homeForm');
+  };
   handleSubmit = (values) => {
     queryUtils.pushQueryParams(this.props.location, this.props.history, {
       search: values.search,
-    });
+    });  
   };
   handleClick = (id) => {
     queryUtils.pushQueryParams(this.props.location, this.props.history, {
       section: id,
     });
 
-    /*
-    scoller.scrollTo('graph', {
-      offset: 300,
-    });
-    */
+    scroll.scrollTo(this.graphRef.current.offsetTop);
   };
   render() {
     const content = () => {
@@ -90,7 +94,7 @@ export default class SectionView extends React.Component {
         <div className={classes.content}>
           <Row>
             <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
-              <Form onSubmit={this.handleSubmit} initialValues={{
+              <Form onSubmit={this.handleSubmit} onSearch={this.handleSearch} initialValues={{
                 search: this.props.search
               }} />
             </Col>
@@ -104,11 +108,11 @@ export default class SectionView extends React.Component {
                     id={this.props.sectionId} />
                 </Col>
 
-                <Element name="graph">
+                <div ref={this.graphRef}>
                   <Col lg={{ span: 18 }} sm={{ span: 24 }}>
                     {content()}
                   </Col>
-                </Element>
+                </div>
               </Col>
             </Row>
           </div>
