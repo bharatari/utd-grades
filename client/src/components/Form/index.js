@@ -14,7 +14,7 @@ class HomeForm extends React.Component {
   render() {
     const { handleSubmit, onSearch, pristine, reset, submitting } = this.props;
     const content = (
-      <div>
+      <div className={classes.popover}>
         <p>You can search for:</p>
         <ul>
           <li>A specific section: CS 1337.501</li>
