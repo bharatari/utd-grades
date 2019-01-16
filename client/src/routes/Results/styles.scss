@@ -4,10 +4,17 @@
 }
 
 .results {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   padding-bottom: 20px;
   margin-top: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+.results :global(.ant-list-pagination) {
+  padding-left: 10px;
+}
+
+.results :global(.ant-list-pagination) li {
+  margin-bottom: 10px;
 }
 
 .menu {
@@ -79,4 +86,16 @@
   color: #a4a4a4;
   font-weight: 300;
   font-size: 26px;
+}
+
+@media (max-width: 992px) {
+  .results {
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .results {
+    box-shadow: 0 15px 50px rgba(233, 233, 233, 0.7);
+  }
 }

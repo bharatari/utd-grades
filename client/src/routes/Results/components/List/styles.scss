@@ -10,6 +10,14 @@
   background-color: #fcfcfc;
 }
 
+.item:first-child {
+  border-top-left-radius: 5px;
+}
+
+.item :global(.ant-list-item-meta-title) a {
+  font-weight: 600;
+}
+
 .selected {
   border-right: 6px solid rgb(0, 116, 224) !important;
   box-shadow: inset -5px 0px 10px rgba(0, 0, 0, 0.05);

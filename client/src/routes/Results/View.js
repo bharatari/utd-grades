@@ -110,7 +110,7 @@ export default class SectionView extends React.Component {
           
           <div id="results">
             <Row>
-              <Col span="20" offset="2" className={classes.results}>         
+              <Col lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }} className={classes.results}>         
                 <Col lg={{ span: 6 }} sm={{ span: 24 }}>
                   <List data={this.props.sections} onClick={this.handleClick} loading={this.props.requestingSections}
                     id={this.props.sectionId} />
