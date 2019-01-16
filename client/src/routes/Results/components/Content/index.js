@@ -17,6 +17,24 @@ export default class Content extends React.Component {
           },
         }],
       },
+      tooltips: {
+        enabled: true,
+        mode: 'single',
+        callbacks: {
+          label: (tooltipItems, data) => {
+            const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(this.props.section.grades));
+            const total = _.sum(values);
+
+            let text = [`Students: ${tooltipItems.yLabel}`];
+            const count = tooltipItems.yLabel;
+            const percentage = (count / total) * 100;
+
+            text.push(`Percentage: ${percentage.toFixed(2)}%`);
+            
+            return text;
+          }
+        }
+    },
     },
   };
   transformData = (grades) => {
@@ -32,7 +50,7 @@ export default class Content extends React.Component {
       if (this.props.otherSections) {
         return this.props.otherSections.map((section) => (
           <SectionCard key={section.id} section={section} backgroundColor="rgb(57, 57, 57)" history={this.props.history}
-            currentSectionId={this.props.section.id} />
+            currentSectionId={this.props.section.id} location={this.props.location} />
         ))
       }
       
@@ -42,10 +60,11 @@ export default class Content extends React.Component {
     const { keys, values, colors } = this.transformData(this.props.section.grades);
 
     return (
-      <div>
+      <div className={classes.container}>
         <Row>
           <h3 className={classes.header}>{this.props.section.course.prefix} {this.props.section.course.number}<span className={classes.section}>.{this.props.section.number}</span></h3>
           <h5 className={classes.subheader}>{this.props.section.professor.lastName}, {this.props.section.professor.firstName} - {this.props.section.course.semester.name}</h5>
+          <h5 className={classes.total}>Total Students <span style={{ color: '#333333' }}>{_.sum(values)}</span></h5>
         </Row>
 
         <Row>

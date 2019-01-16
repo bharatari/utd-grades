@@ -1,0 +1,102 @@
+.content {
+  display: block;
+  position: relative; 
+}
+
+.results {
+  padding-bottom: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.results :global(.ant-list-pagination) {
+  padding-left: 10px;
+}
+
+.results :global(.ant-list-pagination) li {
+  margin-bottom: 10px;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+.menu {
+  padding: 15px;
+}
+
+.back {
+  background: none;
+  outline: none;
+  border: none;
+  display: inline-block;
+  margin-top: 15px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.header {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgb(78, 78, 78);
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 26px;
+  margin-bottom: 15px;
+  margin-top: -39px;
+}
+
+.headerBold {
+  font-weight: 700;
+}
+
+.quickLinksHeader {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.quickLinksContainer {
+  margin-top: 100px;
+}
+
+.quickLinkItems {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  align-content: flex-start;
+}
+
+.spinner {
+  margin-left: auto;
+  margin-right: auto;
+  display: block !important;
+}
+
+.emptyContainer {
+  padding: 50px;
+}
+
+.loadingContainer {
+  padding: 50px;
+}
+
+.empty {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;;
+  color: #a4a4a4;
+  font-weight: 300;
+  font-size: 26px;
+}
+
+@media (max-width: 992px) {
+  .results {
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .results {
+    box-shadow: 0 15px 50px rgba(233, 233, 233, 0.7);
+  }
+}

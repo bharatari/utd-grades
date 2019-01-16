@@ -5,18 +5,22 @@ const init = require('../functions/models/index');
 const ProgressBar = require('progress');
 
 async function run() {
-  const sequelize = init();
-  
-  let content = JSON.parse(fs.readFileSync('data/complete.json', 'utf8'));
+  try {
+    const sequelize = init();
 
-  const models = sequelize.models;
+    let content = JSON.parse(fs.readFileSync('data/fall2018.json', 'utf8'));
 
-  const bar = new ProgressBar(':bar :current | :total', { total: content.length });
+    const models = sequelize.models;
 
-  for (let i = 0; i < content.length; i++) {
-    await saveItem(content[i], i, models);
+    const bar = new ProgressBar(':bar :current | :total', { total: content.length });
 
-    bar.tick();
+    for (let i = 0; i < content.length; i++) {
+      await saveItem(content[i], i, models);
+
+      bar.tick();
+    }
+  } catch (e) {
+    console.log(e);
   }
 }
 

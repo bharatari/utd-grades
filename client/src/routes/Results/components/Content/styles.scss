@@ -1,3 +1,8 @@
+.container {
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
 .header {
   font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 700;
@@ -12,6 +17,13 @@
   color: rgb(117, 117, 117);
 }
 
+.total {
+  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: rgb(117, 117, 117);
+}
+
 .section {
   color: rgb(165, 165, 165);
 }
@@ -21,12 +33,6 @@
   font-weight: 700;
   text-transform: uppercase;
   font-size: 16px;
-}
-
-.graphContainer {
-  box-shadow: 0 16px 30px rgba(0,0,0,.1);
-  border-radius: 10px;
-  padding: 20px;
 }
 
 .otherSectionsRow {
@@ -42,7 +48,27 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.sectionsContainer::-webkit-scrollbar {
-  /* This could be problematic */
-  /* display: none; */
+@media (max-width: 992px) {
+  .graphContainer {
+    padding-top: 20px;
+    margin-bottom: -20px;
+  }
+
+  .container {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+@media (min-width: 992px) {
+  .graphContainer {
+    box-shadow: 0 15px 30px rgba(233, 233, 233, 0.7);
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .container {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }

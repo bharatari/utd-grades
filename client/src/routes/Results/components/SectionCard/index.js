@@ -3,6 +3,7 @@ import classes from './styles.scss';
 import { Card } from 'antd';
 import classNames from 'classnames';
 import { SlideUp } from 'components/Animations';
+import queryUtils from 'utils/query';
 
 const dummyItem = classNames(
   classes.card,
@@ -13,7 +14,10 @@ export default class SectionCard extends React.Component {
   handleClick = (e) => {
     e.preventDefault();
 
-    this.props.history.push(`/app/section/${this.props.section.id}`);
+    queryUtils.pushQueryParams(this.props.location, this.props.history, {
+      search: `${this.props.section.course.prefix} ${this.props.section.course.number}`,
+      section: this.props.section.id,
+    });
   };
   render() {
     const { section, dummy, backgroundColor, currentSectionId } = this.props;
