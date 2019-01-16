@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import classes from './styles.scss';
 import classNames from 'classnames';
-import { List, Spin, Icon } from 'antd';
+import { List, Spin, Icon, Popover } from 'antd';
 import general from 'utils/general';
 
 const IconText = ({ type, text }) => (
@@ -14,10 +14,21 @@ const IconText = ({ type, text }) => (
 
 export default class ResultsList extends React.Component {
   render() {
+    const popover = (
+      <div className={classes.popover}>
+        <p>Because of FERPA restrictions, grade data for certain classes — in particular, classes with a small number of students — is unavailable.</p>
+      </div>
+    );
+
     const empty = (
       <div className={classes.emptyContainer}>
         <Icon className={classes.icon} type="frown" theme="twoTone" />
         <p className={classes.error}>We weren't able to find that. Try searching for something else!</p>
+        <Popover content={popover} className={classes.hint} placement="bottom">
+          <span style={{ textAlign: 'center' }}>
+            Still can't find what you're looking for? <span style={{ textDecoration: 'underline' }}>Learn more.</span>
+          </span>
+        </Popover>
       </div>
     );
 
