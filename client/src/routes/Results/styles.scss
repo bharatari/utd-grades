@@ -15,6 +15,7 @@
 
 .results :global(.ant-list-pagination) li {
   margin-bottom: 10px;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
 
 .menu {
@@ -34,7 +35,7 @@
 }
 
 .header {
-  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   text-transform: uppercase;
   text-align: center;
   color: rgb(78, 78, 78);
@@ -82,7 +83,7 @@
 }
 
 .empty {
-  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;;
   color: #a4a4a4;
   font-weight: 300;
   font-size: 26px;
