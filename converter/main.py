@@ -3,7 +3,7 @@ import json
 import os
 import math
 
-TERM = '2018 Fall'
+TERM = '2019 Spring'
 
 def main():
   dirname = os.path.dirname(__file__)
@@ -21,7 +21,7 @@ def main():
   with open(output_filename, 'w+', encoding='utf-8') as outfile:
     json.dump(processed_records, outfile)
 
-def nest_grades(records: list):
+def nest_grades(records):
   for record in records:
     record['grades'] = construct_dict_of_grades(record)
     record = clean_record(record)
@@ -29,7 +29,7 @@ def nest_grades(records: list):
 
   return records
 
-def construct_dict_of_grades(record: dict):
+def construct_dict_of_grades(record):
   grades = dict()
 
   grades['A+'] = record['A+']
@@ -55,7 +55,7 @@ def construct_dict_of_grades(record: dict):
 
   return cleaned_grades
 
-def clean_record(record: dict):
+def clean_record(record):
   del record['A+']
   del record['A']
   del record['A-']
