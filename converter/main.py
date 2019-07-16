@@ -11,14 +11,14 @@ def main():
 
   df = pd.read_excel(filename)
   df = df.rename(index=str, columns={'Subject': 'subj', 'Catalog Number': 'num', 'Section': 'sect', 'Instructor 1': 'prof'})
-  df = df.drop(columns=['Instructor 2', 'Instructor 3', 'Instructor 4', 'Instructor 5', 'Instructor 6'])
 
+  df = df.drop(columns=['Instructor 2', 'Instructor 3', 'Instructor 4', 'Instructor 5', 'Instructor 6'], axis=1)
   records = df.to_dict('records')
   processed_records = nest_grades(records)
 
   output_filename = os.path.join(dirname, 'output/output.json')
 
-  with open(output_filename, 'w+', encoding='utf-8') as outfile:
+  with open(output_filename, 'w+') as outfile:
     json.dump(processed_records, outfile)
 
 def nest_grades(records):

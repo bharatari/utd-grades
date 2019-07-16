@@ -8,7 +8,7 @@ async function run() {
   try {
     const sequelize = init();
 
-    let content = JSON.parse(fs.readFileSync('data/fall2018.json', 'utf8'));
+    let content = JSON.parse(fs.readFileSync('data/spring2019.json', 'utf8'));
 
     const models = sequelize.models;
 
