@@ -6,7 +6,7 @@
     "aws-sdk": "^2.330.0",
     "lodash": "^4.17.11",
     "pg": "^7.5.0",
-    "sequelize": "^4.39.0"
+    "sequelize": "^5.15.1"
   },
   "devDependencies": {
     "serverless-offline": "^3.27.0"
