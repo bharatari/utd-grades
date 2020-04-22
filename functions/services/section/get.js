@@ -3,7 +3,7 @@ const respond = require('../../utils/respond');
 
 module.exports.get = async (event) => {
   try {
-    let service = new Section();
+    let service = new SectionService();
     let response = await service.get(event.pathParameters.id);
 
     return respond.success(response);

@@ -1,10 +1,10 @@
-const Section = require('./index');
+const SectionService = require('./index');
 const respond = require('../../utils/respond');
 const utils = require('./utils');
 
 module.exports.find = async (event) => {
   try {
-    let service = new Section();
+    let service = new SectionService();
 
     let queryParams = event['queryStringParameters'];
     queryParams = await utils.parseSearchStringIfExists(queryParams);

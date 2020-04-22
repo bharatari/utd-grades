@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 
-class Section {
+class SectionService {
   constructor(sequelize) {
     this.sequelize = init();
   }
@@ -137,4 +137,4 @@ class Section {
   }
 }
 
-module.exports = Section;
+module.exports = SectionService;
