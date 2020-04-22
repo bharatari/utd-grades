@@ -1,18 +1,11 @@
 import React from 'react';
 import classes from './styles.scss';
-import { Core, Form } from 'components/';
+import { Core, Form } from '../../components';
 import { Row, Col } from 'antd';
 import queryUtils from 'utils/query';
 
 export default class HomeView extends React.Component {
-  handleSearch = () => {
-    this.props.actions.submit('homeForm');
-  };
-  handleSubmit = (values) => {
-    queryUtils.pushQueryParamsToURL(this.props.location, this.props.history, {
-      search: values.search
-    }, '/app/results');
-  };
+  
   render() {
     return (
       <Core> 

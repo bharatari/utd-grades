@@ -1,0 +1,62 @@
+import React from 'react';
+import classes from './styles.scss';
+import Router from 'next/router';
+import styled from 'styled-components';
+import { Core, Form } from '../components';
+import { Row, Col } from 'antd';
+
+import Head from 'next/head'
+
+// TODO set font-family css variable
+const Content = styled.div`
+  padding-top: 30vh; 
+  display: block;
+  position: relative;
+`;
+
+const Header = styled.h2`
+  font-family: var(--font-family);
+  text-transform: uppercase;
+  text-align: center;
+  color: rgb(78, 78, 78);
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 26px;
+  margin-bottom: 15px;
+`;
+
+const Description = styled.p`
+  font-family: var(--font-family);
+  text-align: center;
+  color: #95989A;
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 30px;
+`;
+
+const HeaderBold = styled.span`
+  font-weight: 700;
+`;
+
+export default function Home() {
+  function handleSubmit({ search }) {
+    Router.push({
+      pathname: '/results',
+      query: { search }
+    });
+  }
+
+  return (
+    <Core> 
+      <Content>
+        <Row>
+          <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
+            <Header><HeaderBold>UTD</HeaderBold> Grades</Header>
+            <Description>See how students did in any given class. And it's <strong>free, forever.</strong></Description>
+            <Form onSubmit={handleSubmit} />
+          </Col>
+        </Row>
+      </Content>
+    </Core>
+  )
+}

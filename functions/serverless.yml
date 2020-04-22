@@ -13,7 +13,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: utd-grades
+  profile: personal
   region: us-east-2
   stage: production
   stackTags:
