@@ -1,14 +1,35 @@
 import React from 'react';
-import classes from './styles.scss';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Popover, Input } from 'antd';
-import { AutoComplete } from 'components/';
+import styled from 'styled-components';
 
-const Search = Input.Search;
+// TODO migrate to formik
+const StyledSearch = styled(Input.Search)`
+  &&& input {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 20px !important;
+    outline: none;
+    font-family: var(--font-family);
+  }
+`;
 
 const renderField = ({ input, ...props }) => (
-  <Search {...input} {...props} />
+  <StyledSearch {...input} {...props} />
 );
+
+const Popover = styled.div`
+  font-family: var(--font-family);
+  width: 375px;
+`;
+
+const Hint = styled(Popover)`
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  font-family: var(--font-family);
+  color: #95989A;
+`;
 
 class HomeForm extends React.Component {
   render() {
@@ -28,13 +49,13 @@ class HomeForm extends React.Component {
 
     return (
       <Form onSubmit={handleSubmit}>
-        <Field name="search" size="large" className={classes.input} placeholder="ex. CS 1337 Fall 2017 Smith" component={renderField}
+        <Field name="search" size="large" placeholder="ex. CS 1337 Fall 2017 Smith" component={renderField}
           onSearch={onSearch} />
-        <Popover content={content} className={classes.hint} placement="bottom">
+        <Hint content={content} placement="bottom">
           <span style={{ textAlign: 'center' }}>
             Need to know what you can enter? <span style={{ textDecoration: 'underline' }}>Pretty much anything.</span>
           </span>
-        </Popover>
+        </Hint>
       </Form>
     )
   }

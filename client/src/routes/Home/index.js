@@ -1,38 +1,32 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import reducer from './modules/reducer';
-import { rootSaga } from './modules/sagas';
-import { submit } from 'redux-form';
-import { injectReducer, injectSaga } from 'modules/';
-import View from './View';
-import * as section from '../../modules/section/actions';
-import { normalizedSectionsSelector } from 'modules/section/selectors';
+import React from 'react';
+import classes from './styles.scss';
+import { Core, Form } from 'components/';
+import { Row, Col } from 'antd';
+import queryUtils from 'utils/query';
 
-const mapStateToProps = (state, ownProps) => ({
-  location: ownProps.location,
-  history: ownProps.history,
-});
-
-const actionCreators = {
-  ...section,
-  submit,
-};
-
-const localActionCreators = {
-
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(actionCreators, dispatch),
-  localActions: bindActionCreators(localActionCreators, dispatch),
-});
-
-const Route = withRouter(connect(mapStateToProps, mapDispatchToProps)(View));
-
-export default (store) => {
-  injectReducer(store, 'home', reducer);
-  injectSaga(store, rootSaga);
-
-  return Route;
-};
+export default class HomeView extends React.Component {
+  handleSearch = () => {
+    this.props.actions.submit('homeForm');
+  };
+  handleSubmit = (values) => {
+    queryUtils.pushQueryParamsToURL(this.props.location, this.props.history, {
+      search: values.search
+    }, '/app/results');
+  };
+  render() {
+    return (
+      <Core> 
+        <div className={classes.content}>
+          <Row>
+            <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
+              <h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2>
+              
+              <p className={classes.description}>See how students did in any given class. And it's <strong>free, forever.</strong></p>
+              <Form onSubmit={this.handleSubmit} onSearch={this.handleSearch} />
+            </Col>
+          </Row>
+        </div>
+      </Core>
+    );
+  }
+}

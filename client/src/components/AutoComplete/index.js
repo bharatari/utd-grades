@@ -1,6 +1,4 @@
-import React, { PropTypes } from 'react'
-import classes from './styles.scss';
-import classNames from 'classnames';
+import React from 'react'
 import { AutoComplete as Complete } from 'antd';
 
 const Option = Complete.Option;

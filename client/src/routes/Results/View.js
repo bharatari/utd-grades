@@ -1,131 +1,142 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './styles.scss';
 import { Core, Form } from 'components/';
 import { Content, List } from './components';
-import { Button, Row, Col, Card, Icon, Popover, Spin, Input } from 'antd';
+import { Button, Row, Col, Spin } from 'antd';
 import queryUtils from 'utils/query';
-import { Element, scroller, animateScroll as scroll } from 'react-scroll';
+import { animateScroll as scroll } from 'react-scroll';
+import sectionModule from 'modules/section';
 
-export default class SectionView extends React.Component {
-  constructor(props) {
-    super(props);
+export default function Section({ search, location, history }) {
+  const graphRef = React.useRef();
 
-    this.graphRef = React.createRef();
-  }
-  componentDidMount() {
-    this.props.actions.resetSections();
-    this.props.actions.resetSection();
+  const parsedQueryParams = queryUtils.parseQueryParams(location.search);
+  const sectionId = parsedQueryParams.section;
+  const search = parsedQueryParams.search;
 
-    this.init();
-  }
-  componentDidUpdate(prevProps) {
-    this.init(prevProps);
-  }
-  init = (prevProps) => {
-    if (!prevProps) {
-      prevProps = {};
-    }
+  const [sections, setSections] = useState();
+  const [loadingSections, setLoadingSections] = useState(false);
 
-    if (this.props.search) {
-      if (this.props.search !== prevProps.search) {
-        this.props.actions.resetSections();
-        this.resetSection();
+  const [relatedSections, setRelatedSections] = useState();
 
-        this.props.actions.fetchSections(this.props.search);
+  const [section, setSection] = useState();
+  const [loadingSection, setLoadingSection] = useState(false);
+
+  useEffect(() => (
+    (async () => {
+      setSections([]);
+      setSection([]);
+  
+      if (search) {
+        setLoadingSection(true);
+  
+        const response = await sectionModule.fetchSections(search);
+  
+        setSections(response);
       }
-    }
+    })()
+  ), [search]);
 
-    if (this.props.sectionId) {
-      if (this.props.sectionId !== prevProps.sectionId) {
-        this.props.actions.resetOtherSections();
-
-        this.props.actions.fetchSection(this.props.sectionId);
+  useEffect(() => (
+    (async () => {
+      if (sectionId != null) {
+        setRelatedSections([]);
+  
+        const response = await sectionModule.fetchSection(sectionId);
+  
+        setSection(response);
+      } else {
+        queryUtils.deleteQueryParam(location, history, 'section');
       }
-    }
+    })()
+  ), [sectionId]);
 
-    if (this.props.section && !prevProps.section) {      
-      this.props.actions.fetchOtherSections({
-        number: this.props.section.course.number,
-        prefix: this.props.section.course.prefix,
-      });
-    }    
-  };
-  resetSection = () => {
-    this.props.actions.resetSection();
+  useEffect(() => (
+    (async () => {
+      if (section) {
+        const response = await sectionModule.fetchSections({
+          number: section.course.number,
+          prefix: section.course.prefix,
+        });
 
-    queryUtils.deleteQueryParam(this.props.location, this.props.history, 'section');
-  };
-  goHome = () => {
-    this.props.history.push('/');
-  };
-  handleSearch = () => {
+        setRelatedSections(response);
+      }
+    })()
+  ), [section]);
+
+  function goHome() {
+    history.push('/');
+  }
+
+  function handleSearch() {
     this.props.actions.submit('homeForm');
-  };
-  handleSubmit = (values) => {
-    queryUtils.pushQueryParams(this.props.location, this.props.history, {
+  }
+
+  function handleSubmit(values) {
+    queryUtils.pushQueryParams(location, history, {
       search: values.search,
     });  
-  };
-  handleClick = (id) => {
-    queryUtils.pushQueryParams(this.props.location, this.props.history, {
+  }
+
+  function handleClick(id) {
+    queryUtils.pushQueryParams(location, history, {
       section: id,
     });
 
-    scroll.scrollTo(this.graphRef.current.offsetTop);
-  };
-  render() {
-    const content = () => {
-      if (this.props.section) {
-        return <Content section={this.props.section} otherSections={this.props.otherSections} history={this.props.history} location={this.props.location} />;
-      } else if (this.props.requestingSection) {
-        return(
-          <div className={classes.loadingContainer}>
-            <Spin className={classes.spinner} />
-          </div>
-        );
-      } else {
-        return (
-          <div className={classes.emptyContainer}>
-            <h2 className={classes.empty}>Nothing to see here, select a section!</h2>
-          </div>
-        );
-      }
-    };
+    scroll.scrollTo(graphRef.current.offsetTop);
+  }
 
-    return (
-      <Core>
-        <Row className={classes.menu}>
-          <Button className={classes.back} onClick={this.goHome} type="ghost" shape="circle" icon="home" size="large" />
-          <a href="javascript:void(0)" onClick={this.goHome}><h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2></a>
+  const content = () => {
+    if (section) {
+      return <Content section={section} otherSections={otherSections} history={history} location={location} />;
+    } else if (loadingSection) {
+      return(
+        <div className={classes.loadingContainer}>
+          <Spin className={classes.spinner} />
+        </div>
+      );
+    } else {
+      return (
+        <div className={classes.emptyContainer}>
+          <h2 className={classes.empty}>Nothing to see here, select a section!</h2>
+        </div>
+      );
+    }
+  };
+
+  return (
+    <Core>
+      <Row className={classes.menu}>
+        <Button className={classes.back} onClick={goHome} type="ghost" shape="circle" icon="home" size="large" />
+        <a href="javascript:void(0)" onClick={goHome}><h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2></a>
+      </Row>
+      
+      <div className={classes.content}>
+        <Row>
+          <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
+            <Form onSubmit={handleSubmit} onSearch={handleSearch} initialValues={{
+              search
+            }} />
+          </Col>
         </Row>
         
-        <div className={classes.content}>
+        <div id="results">
           <Row>
-            <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
-              <Form onSubmit={this.handleSubmit} onSearch={this.handleSearch} initialValues={{
-                search: this.props.search
-              }} />
+            <Col lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }} className={classes.results}>         
+              <Col lg={{ span: 6 }} sm={{ span: 24 }}>
+                <List data={sections} onClick={handleClick} loading={loadingSections}
+                  id={sectionId} />
+              </Col>
+
+              <div ref={graphRef}>
+                <Col lg={{ span: 18 }} sm={{ span: 24 }}>
+                  {content()}
+                </Col>
+              </div>
             </Col>
           </Row>
-          
-          <div id="results">
-            <Row>
-              <Col lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }} className={classes.results}>         
-                <Col lg={{ span: 6 }} sm={{ span: 24 }}>
-                  <List data={this.props.sections} onClick={this.handleClick} loading={this.props.requestingSections}
-                    id={this.props.sectionId} />
-                </Col>
-
-                <div ref={this.graphRef}>
-                  <Col lg={{ span: 18 }} sm={{ span: 24 }}>
-                    {content()}
-                  </Col>
-                </div>
-              </Col>
-            </Row>
-          </div>
         </div>
-      </Core>
-    );
-  }
+      </div>
+    </Core>
+  );
 }
