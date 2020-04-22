@@ -10,11 +10,11 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "antd": "^3.9.2",
+    "antd": "^4.1.4",
     "chart.js": "^2.7.2",
     "formik": "^2.1.4",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.15",
     "query-string": "^6.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -26,8 +26,7 @@
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "nwb": "0.21.x",
-    "redux-devtools-extension": "^2.13.5"
+    "nwb": "^0.24.5"
   },
   "author": "",
   "license": "MIT",
