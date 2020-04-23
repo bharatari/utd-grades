@@ -20,5 +20,10 @@
     "react-scroll": "^1.7.16",
     "react-transition-group": "^4.3.0",
     "styled-components": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "2.0.5"
   }
 }
