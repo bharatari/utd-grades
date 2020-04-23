@@ -98,7 +98,7 @@ const Stack = styled.div`
   flex-direction: column;
 `;
 
-export default function SectionContent({ relatedSections, section }) {
+export default function SectionContent({ relatedSections, section, handleRelatedSectionClick }) {
   const [options, setOptions] = useState({ 
     legend: { display: false },
     scales: {
@@ -140,7 +140,7 @@ export default function SectionContent({ relatedSections, section }) {
   const renderRelatedSections = () => {
     if (relatedSections) {
       return relatedSections.filter(s => s.id != section.id).map(s => (
-        <SectionCard key={s.id} section={s} />
+        <SectionCard key={s.id} section={s} handleRelatedSectionClick={handleRelatedSectionClick} />
       ))
     }
     

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form as AntForm, Popover as AntPopover, Input } from 'antd';
 import styled from 'styled-components';
 
@@ -17,7 +17,7 @@ const Hint = styled(AntPopover)`
   margin-right: auto;
   display: block;
   font-family: var(--font-family);
-  color: #95989A;
+  color: #95989a;
 `;
 
 const Popover = styled.div`
@@ -25,7 +25,10 @@ const Popover = styled.div`
   width: 375px;
 `;
 
-export default function Form({ onSubmit, initialValues: { search } = { search: '' } }) {
+export default function Form({
+  onSubmit,
+  initialValues: { search } = { search: '' },
+}) {
   const content = (
     <Popover>
       <p>You can search for:</p>
@@ -39,16 +42,36 @@ export default function Form({ onSubmit, initialValues: { search } = { search: '
     </Popover>
   );
 
-  function handleSubmit(search) {
-    onSubmit({ search });
+  useEffect(() => {
+    setSearchValue(search);
+  }, [search]);
+
+  function handleSubmit(value) {
+    onSubmit({ search: value });
+  }
+
+  const [searchValue, setSearchValue] = useState();
+
+  function handleChange(e) {
+    setSearchValue(e.target.value);
   }
 
   return (
     <AntForm>
-      <StyledSearch name="search" size="large" placeholder="ex. CS 1337 Fall 2017 Smith" onSearch={handleSubmit} defaultValue={search} />
+      <StyledSearch
+        name="search"
+        size="large"
+        placeholder="ex. CS 1337 Fall 2017 Smith"
+        onSearch={handleSubmit}
+        onChange={handleChange}
+        value={searchValue}
+      />
       <Hint content={content} placement="bottom">
         <span style={{ textAlign: 'center' }}>
-          Need to know what you can enter? <span style={{ textDecoration: 'underline' }}>Pretty much anything.</span>
+          Need to know what you can enter?{' '}
+          <span style={{ textDecoration: 'underline' }}>
+            Pretty much anything.
+          </span>
         </span>
       </Hint>
     </AntForm>

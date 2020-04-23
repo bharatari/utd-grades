@@ -24,9 +24,9 @@ const Spinner = styled(Spin)`
   display: block !important;
 `;
 
-export default function Content({ section, relatedSections, loadingSection }) {
+export default function Content({ section, relatedSections, loadingSection, handleRelatedSectionClick }) {
   if (section) {
-    return <SectionContent section={section} relatedSections={relatedSections} />;
+    return <SectionContent section={section} relatedSections={relatedSections} handleRelatedSectionClick={handleRelatedSectionClick} />;
   } else if (loadingSection) {
     return(
       <LoadingContainer>

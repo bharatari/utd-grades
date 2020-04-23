@@ -109,14 +109,25 @@ export default function Results() {
     router.push({
       pathname: '/results',
       query: { search }
-    }, { shallow: true });
+    });
   }
 
   function handleClick(id) {
     router.push({
       pathname: '/results',
       query: { search, sectionId: id }
-    }, { shallow: true });
+    });
+
+    const scrollDistance = window.pageYOffset + scrollRef.current.getBoundingClientRect().top
+
+    scroll.scrollTo(scrollDistance);
+  }
+
+  function handleRelatedSectionClick(search, id) {
+    router.push({
+      pathname: '/results',
+      query: { search, sectionId: id }
+    });
 
     const scrollDistance = window.pageYOffset + scrollRef.current.getBoundingClientRect().top
 
@@ -142,7 +153,7 @@ export default function Results() {
          
             <Col lg={18} sm={24}>
               <div style={{ width: '100%', height: '100%' }} ref={scrollRef}>
-                <Content section={section} relatedSections={relatedSections} loadingSection={loadingSection} />
+                <Content section={section} relatedSections={relatedSections} loadingSection={loadingSection} handleRelatedSectionClick={handleRelatedSectionClick} />
               </div>
             </Col>
           </Row>

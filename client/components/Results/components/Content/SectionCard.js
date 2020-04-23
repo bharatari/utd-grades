@@ -44,22 +44,10 @@ const Professor = styled.p`
   margin-bottom: 0px;
 `;
 
-export default function SectionCard({ section }) {
-  function handleClick(e) {
-    e.preventDefault();
-
-    Router.push({
-      pathname: '/results',
-      query: {
-        search: `${section.course.prefix} ${section.course.number}`,
-        sectionId: section.id
-      }
-    }, { shallow: true });
-  }
-
+export default function SectionCard({ section, handleRelatedSectionClick }) {
   return (
     <SlideUp startAt={100}>
-      <Card onClick={handleClick}>
+      <Card onClick={() => handleRelatedSectionClick(`${section.course.prefix} ${section.course.number}`, section.id)}>
         <Name>{section.course.prefix} {section.course.number}.{section.number}</Name>
         <Professor>{section.professor.firstName} {section.professor.lastName} - {section.course.semester.name}</Professor>
       </Card>
