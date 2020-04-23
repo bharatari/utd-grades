@@ -23,7 +23,7 @@ const ResultsContainer = styled(Col)`
 
   & .ant-list-pagination li {
     margin-bottom: 10px;
-    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-family: var(--font-family);
   }
 
   @media (max-width: 992px) {

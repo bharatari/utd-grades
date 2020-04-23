@@ -12,7 +12,7 @@ const EmptyContainer = styled.div`
 `;
 
 const Empty = styled.h2`
-  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;;
+  font-family: var(--font-family);
   color: #a4a4a4;
   font-weight: 300;
   font-size: 26px;
