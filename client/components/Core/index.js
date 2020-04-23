@@ -14,8 +14,10 @@ const Container = styled.div`
 const Body = styled.div`
   width: 100%;
   height: 100%;
-  flex-grow: 1;
+  flex: 1;
   position: relative;
+  display: flex;
+  align-items: stretch;
 `;
 
 const Footer = styled.div`

@@ -118,34 +118,30 @@ export default function Results({ query }) {
     scroll.scrollTo(graphRef.current.offsetTop);
   }
 
-  return (
-    <Core>
-      <Header />
+  return (      
+    <Container>
+      <Row>
+        <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
+          <Form onSubmit={handleSubmit} initialValues={{ search }} />
+        </Col>
+      </Row>
       
-      <Container>
+      <div id="results">
         <Row>
-          <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
-            <Form onSubmit={handleSubmit} initialValues={{ search }} />
-          </Col>
-        </Row>
-        
-        <div id="results">
-          <Row>
-            <ResultsContainer lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }}>         
-              <Col lg={{ span: 6 }} sm={{ span: 24 }}>
-                <List data={sections} onClick={handleClick} loading={loadingSections}
-                  id={sectionId} />
-              </Col>
+          <ResultsContainer lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }}>         
+            <Col lg={{ span: 6 }} sm={{ span: 24 }}>
+              <List data={sections} onClick={handleClick} loading={loadingSections}
+                id={sectionId} />
+            </Col>
 
-              <div ref={graphRef}>
-                <Col lg={{ span: 18 }} sm={{ span: 24 }}>
-                  <Content section={section} relatedSections={relatedSections} loadingSection={loadingSection} />
-                </Col>
-              </div>
-            </ResultsContainer>
-          </Row>
-        </div>
-      </Container>
-    </Core>
+            <div ref={graphRef}>
+              <Col lg={{ span: 18 }} sm={{ span: 24 }}>
+                <Content section={section} relatedSections={relatedSections} loadingSection={loadingSection} />
+              </Col>
+            </div>
+          </ResultsContainer>
+        </Row>
+      </div>
+    </Container>
   );
 }
