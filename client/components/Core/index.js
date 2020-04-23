@@ -29,6 +29,12 @@ const Footer = styled.div`
   padding-right: 10px;
   padding-top: 150px;
   padding-bottom: 15px;
+
+  @media (max-width: 992px) {
+    & {
+      padding-top: 15px;
+    }
+  }
 `;
 
 function Core({ children }) {

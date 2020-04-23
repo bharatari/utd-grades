@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { List, Header, Content } from './components';
-import { Core, Form } from '../';
+import React, { useEffect, useState, useRef } from 'react';
+import { List, Content } from './components';
+import { Form } from '../';
 import { Row, Col } from 'antd';
-import { animateScroll as scroll } from 'react-scroll';
 import * as sectionModule from '../../modules/section';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { animateScroll as scroll } from 'react-scroll';
 
 const Container = styled.div`
   display: block;
@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const ResultsContainer = styled(Col)`
   padding-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 35px;
   border-radius: 5px;
 
   & .ant-list-pagination {
@@ -39,9 +39,8 @@ const ResultsContainer = styled(Col)`
   }
 `;
 
-
 export default function Results() {
-  const graphRef = React.useRef();
+  const scrollRef = useRef();
 
   const router = useRouter();
   const { search, sectionId } = router.query;
@@ -119,7 +118,9 @@ export default function Results() {
       query: { search, sectionId: id }
     }, { shallow: true });
 
-    scroll.scrollTo(graphRef.current.offsetTop);
+    const scrollDistance = window.pageYOffset + scrollRef.current.getBoundingClientRect().top
+
+    scroll.scrollTo(scrollDistance);
   }
 
   return (      
@@ -130,22 +131,23 @@ export default function Results() {
         </Col>
       </Row>
       
-      <div id="results">
-        <Row>
-          <ResultsContainer lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }}>
-            <Row>
-              <Col lg={6} sm={24}>
-                <List data={sections} onClick={handleClick} loading={loadingSections}
-                  id={sectionId} />
-              </Col>
+      <Row>
+        <ResultsContainer lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }}>
+          <Row>
+            <Col lg={6} sm={24}>
+              <List data={sections} onClick={handleClick} loading={loadingSections}
+                id={sectionId} />
+            </Col>
 
-              <Col lg={18} sm={24} ref={graphRef}>
+         
+            <Col lg={18} sm={24}>
+              <div style={{ width: '100%', height: '100%' }} ref={scrollRef}>
                 <Content section={section} relatedSections={relatedSections} loadingSection={loadingSection} />
-              </Col>
-            </Row>
-          </ResultsContainer>
-        </Row>
-      </div>
+              </div>
+            </Col>
+          </Row>
+        </ResultsContainer>
+      </Row>
     </Container>
   );
 }
