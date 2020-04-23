@@ -53,6 +53,10 @@ export default function Results() {
   const [section, setSection] = useState(null);
   const [loadingSection, setLoadingSection] = useState(false);
 
+  const [sortParams, setSortParams] = useState({
+    sortField: 'year',
+    sortDirection: 'DESC'
+  });
   
   useEffect(() => {
     async function fetchSections() {
@@ -62,7 +66,7 @@ export default function Results() {
       if (search) {
         setLoadingSections(true);
   
-        const response = await sectionModule.fetchSections({ search });
+        const response = await sectionModule.fetchSections({ search, ...sortParams });
   
         setSections(response);
         setLoadingSections(false);

@@ -104,18 +104,24 @@ class SectionService {
         return where;
       }
       
-      function sectionOrder() {
-        const { sortField = 'number', sortDirection = 'DESC' } = queryParams;
-        let order;
+      const sectionOrder = () => {
+        const { sortField = 'number', sortDirection = 'ASC' } = queryParams;
+        let order = [];
 
         if (sortField === 'year' || sortField === 'type') {
-          order = [models.course, models.semester, sortField, sortDirection];
+          order.push([models.course, models.semester, sortField, sortDirection]);
         } else if (sortField === 'firstName' || sortField === 'lastName') {
-          order = [models.professor, sortField, sortDirection];
+          order.push([models.professor, sortField, sortDirection]);
         } else if (sortField === 'coursePrefix' || sortField === 'courseNumber') {
-          order = [models.course, sortField, sortDirection];
-        } else if (sortField === 'number') {
-          order = [sortField, sortDirection];
+          order.push([models.course, sortField, sortDirection]);
+        }
+        
+        const sectionNumber = this.sequelize.cast(this.sequelize.fn('REGEXP_REPLACE', this.sequelize.col('section.number'), '[^0-9]', ''), 'integer');
+
+        if (sortField === 'number') {
+          order.push([sectionNumber, sortDirection]);
+        } else {
+          order.push([sectionNumber, 'ASC']);
         }
 
         return order;
@@ -123,7 +129,7 @@ class SectionService {
 
       const sections = await Section.findAll({
         where: sectionWhere(),
-        order: [sectionOrder()],
+        order: sectionOrder(),
         include: [
           {
             model: models.professor,

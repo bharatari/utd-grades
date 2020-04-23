@@ -1,4 +1,4 @@
-const Section = require('./index');
+const SectionService = require('./index');
 const respond = require('../../utils/respond');
 
 module.exports.get = async (event) => {
