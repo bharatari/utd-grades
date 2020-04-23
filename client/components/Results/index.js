@@ -96,8 +96,8 @@ export default function Results({ query }) {
     async function fetchRelatedSections() {
       if (section) {
         const response = await sectionModule.fetchSections({
-          number: section.course.number,
-          prefix: section.course.prefix,
+          courseNumber: section.course.number,
+          coursePrefix: section.course.prefix,
         });
 
         setRelatedSections(response);
@@ -131,17 +131,17 @@ export default function Results({ query }) {
       
       <div id="results">
         <Row>
-          <ResultsContainer lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }}>         
-            <Col lg={{ span: 6 }} sm={{ span: 24 }}>
-              <List data={sections} onClick={handleClick} loading={loadingSections}
-                id={sectionId} />
-            </Col>
+          <ResultsContainer lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }}>
+            <Row>
+              <Col lg={6} sm={24}>
+                <List data={sections} onClick={handleClick} loading={loadingSections}
+                  id={sectionId} />
+              </Col>
 
-            <div ref={graphRef}>
-              <Col lg={{ span: 18 }} sm={{ span: 24 }}>
+              <Col lg={18} sm={24} ref={graphRef}>
                 <Content section={section} relatedSections={relatedSections} loadingSection={loadingSection} />
               </Col>
-            </div>
+            </Row>
           </ResultsContainer>
         </Row>
       </div>

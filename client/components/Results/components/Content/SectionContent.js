@@ -26,6 +26,8 @@ const Container = styled.div`
 `;
 
 const GraphContainer = styled.div`
+  width: 100%;
+
   @media (max-width: 992px) {
     & {
       padding-top: 20px;
@@ -85,9 +87,16 @@ const SectionsContainer = styled.div`
   align-content: flex-start;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  padding: 10px;
+  margin-left: -10px;
 `;
 
-export default function SectionContent({ relatedSectionsf, section }) {
+const Stack = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export default function SectionContent({ relatedSections, section }) {
   const [options, setOptions] = useState({ 
     legend: { display: false },
     scales: {
@@ -128,9 +137,8 @@ export default function SectionContent({ relatedSectionsf, section }) {
   
   const renderRelatedSections = () => {
     if (relatedSections) {
-      return relatedSections.map((section) => (
-        <SectionCard key={section.id} section={section} backgroundColor="rgb(57, 57, 57)"
-          currentSectionId={section.id} />
+      return relatedSections.filter(s => s.id != section.id).map(s => (
+        <SectionCard key={s.id} section={s} />
       ))
     }
     
@@ -141,11 +149,11 @@ export default function SectionContent({ relatedSectionsf, section }) {
 
   return (
     <Container>
-      <Row>
+      <Stack>
         <Header>{section.course.prefix} {section.course.number}<Section>.{section.number}</Section></Header>
         <SubHeader>{section.professor.lastName}, {section.professor.firstName} - {section.course.semester.name}</SubHeader>
         <Total>Total Students <span style={{ color: '#333333' }}>{_.sum(values)}</span></Total>
-      </Row>
+      </Stack>
 
       <Row>
         <GraphContainer>

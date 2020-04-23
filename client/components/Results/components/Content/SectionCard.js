@@ -4,24 +4,22 @@ import { SlideUp } from '../../../Animations';
 import Router from 'next/router';
 
 const Card = styled.div`
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+  box-shadow: var(--box-shadow-inactive);
   border: none;
   padding: 20px;
   min-width: 180px;
-  line-height: 1.5;
-  list-style: none;
-  border-radius: 2px;
+  border-radius: 6px;
   position: relative;
   transition: all 0.3s;
   margin-right: 20px;
   margin-bottom: 20px;
   flex-basis: 200px;
-  flex-grow: 1;
-  flex-shrink: 1;
+  flex: 1;
   cursor: pointer;
+  background-color: white;
 
   &:hover {
-    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.46);
+    box-shadow: var(--box-shadow-active);
   }
 
   @media (max-width: 768px) {
@@ -31,37 +29,22 @@ const Card = styled.div`
   }
 `;
 
-const Dummy = styled(Card)`
-  visibility: hidden;
-  
-  @media (min-width: 2133px) {
-    & {
-      /*display: none;*/
-    }
-  }
-
-  @media (max-width: 768px) {
-    & {
-      display: none;
-    }
-  }
-`;
-
-const Professor = styled.p`
-  color: white;
-  font-family: var(--font-family);
-  font-size: 16px;
-  margin-top: -15px;
-`;
-
 const Name = styled.p`
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 20px;
-  color: white;
+  color: rgba(0, 0, 0, 0.65);
 `;
 
-export default function SectionCard({ section, dummy, backgroundColor, currentSectionId }) {
+const Professor = styled.p`
+  color: rgba(0, 0, 0, 0.45);
+  font-family: var(--font-family);
+  font-size: 14px;
+  margin-top: -15px;
+  margin-bottom: 0px;
+`;
+
+export default function SectionCard({ section }) {
   function handleClick(e) {
     e.preventDefault();
 
@@ -73,19 +56,9 @@ export default function SectionCard({ section, dummy, backgroundColor, currentSe
     });
   }
 
-  if (dummy) {
-    return (
-      <Dummy />
-    );
-  }
-
-  if (currentSectionId === section.id) {
-    return null;
-  }
-
   return (
     <SlideUp startAt={100}>
-      <Card style={{ backgroundColor }} onClick={handleClick}>
+      <Card onClick={handleClick}>
         <Name>{section.course.prefix} {section.course.number}.{section.number}</Name>
         <Professor>{section.professor.firstName} {section.professor.lastName} - {section.course.semester.name}</Professor>
       </Card>

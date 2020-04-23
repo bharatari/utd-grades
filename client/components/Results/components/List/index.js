@@ -122,6 +122,7 @@ export default function ResultsList({ loading, id, data, onClick }) {
             style: {
               marginRight: '10px'
             },
+            showSizeChanger: false
           }}
           dataSource={data}
           renderItem={item => {  
