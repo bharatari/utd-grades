@@ -1,10 +1,9 @@
 import React from 'react';
-import { Formik } from 'formik';
 import { Form as AntForm, Popover as AntPopover, Input } from 'antd';
 import styled from 'styled-components';
 
 const StyledSearch = styled(Input.Search)`
-  &&& input {
+  &&& {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
     border-radius: 20px !important;
     outline: none;
@@ -26,7 +25,7 @@ const Popover = styled.div`
   width: 375px;
 `;
 
-export default function Form({ onSubmit }) {
+export default function Form({ onSubmit, initialValues: { search } = { search: '' } }) {
   const content = (
     <Popover>
       <p>You can search for:</p>
@@ -40,18 +39,18 @@ export default function Form({ onSubmit }) {
     </Popover>
   );
 
+  function handleSubmit(search) {
+    onSubmit({ search });
+  }
+
   return (
-    <Formik onSubmit={onSubmit}>
-      {(values, handleSubmit) => (
-        <AntForm onSubmit={handleSubmit}>
-          <StyledSearch name="search" size="large" placeholder="ex. CS 1337 Fall 2017 Smith" onSearch={handleSubmit} />
-          <Hint content={content} placement="bottom">
-            <span style={{ textAlign: 'center' }}>
-              Need to know what you can enter? <span style={{ textDecoration: 'underline' }}>Pretty much anything.</span>
-            </span>
-          </Hint>
-        </AntForm>
-      )}
-    </Formik> 
+    <AntForm>
+      <StyledSearch name="search" size="large" placeholder="ex. CS 1337 Fall 2017 Smith" onSearch={handleSubmit} />
+      <Hint content={content} placement="bottom">
+        <span style={{ textAlign: 'center' }}>
+          Need to know what you can enter? <span style={{ textDecoration: 'underline' }}>Pretty much anything.</span>
+        </span>
+      </Hint>
+    </AntForm>
   );
 }

@@ -3,6 +3,8 @@ import data from '../../utils/data';
 export async function fetchSections(params) {
   try { 
     const response = await data.request('section', 'get', null, params);
+
+    return response;
   } catch (e) {
     throw e;
   }

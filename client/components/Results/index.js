@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { List, Header, Content } from './components';
 import { Core, Form } from '../';
-import { Button, Row, Col, Spin } from 'antd';
+import { Row, Col } from 'antd';
 import { animateScroll as scroll } from 'react-scroll';
 import * as sectionModule from '../../modules/section';
 import Router from 'next/router';
@@ -45,31 +45,34 @@ export default function Results({ query }) {
 
   const { search, sectionId } = query;
 
-  const [sections, setSections] = useState();
+  const [sections, setSections] = useState([]);
   const [loadingSections, setLoadingSections] = useState(false);
 
-  const [relatedSections, setRelatedSections] = useState();
+  const [relatedSections, setRelatedSections] = useState([]);
 
-  const [section, setSection] = useState();
+  const [section, setSection] = useState(null);
   const [loadingSection, setLoadingSection] = useState(false);
 
-  useEffect(() => (
-    (async () => {
+  
+  useEffect(() => {
+    async function fetchSections() {
       setSections([]);
-      setSection([]);
+      setSection(null);
   
       if (search) {
         setLoadingSection(true);
   
-        const response = await sectionModule.fetchSections(search);
+        const response = await sectionModule.fetchSections({ search });
   
         setSections(response);
       }
-    })()
-  ), [search]);
+    }
 
-  useEffect(() => (
-    (async () => {
+    fetchSections();
+  }, [search]);
+
+  useEffect(() => {
+    async function fetchSection() {
       if (sectionId != null) {
         setRelatedSections([]);
   
@@ -81,11 +84,13 @@ export default function Results({ query }) {
           query: {}
         });
       }
-    })()
-  ), [sectionId]);
+    }
 
-  useEffect(() => (
-    (async () => {
+    fetchSection();
+  }, [sectionId]);
+
+  useEffect(() => {
+    async function fetchRelatedSections() {
       if (section) {
         const response = await sectionModule.fetchSections({
           number: section.course.number,
@@ -94,12 +99,10 @@ export default function Results({ query }) {
 
         setRelatedSections(response);
       }
-    })()
-  ), [section]);
+    }
 
-  function goHome() {
-    history.push('/');
-  }
+    fetchRelatedSections();
+  }, [section]);
 
   function handleSubmit({ search }) {
     Router.push('/results', {
@@ -109,7 +112,7 @@ export default function Results({ query }) {
 
   function handleClick(id) {
     Router.push('/results', {
-      query: { sectionId: id }
+      query: { search, sectionId: id }
     });
 
     scroll.scrollTo(graphRef.current.offsetTop);
@@ -122,9 +125,7 @@ export default function Results({ query }) {
       <Container>
         <Row>
           <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
-            <Form onSubmit={handleSubmit} initialValues={{
-              search
-            }} />
+            <Form onSubmit={handleSubmit} initialValues={{ search }} />
           </Col>
         </Row>
         
