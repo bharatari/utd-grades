@@ -1,11 +1,8 @@
 import React from 'react';
-import classes from './styles.scss';
 import Router from 'next/router';
 import styled from 'styled-components';
 import { Core, Form } from '../components';
 import { Row, Col } from 'antd';
-
-import Head from 'next/head'
 
 // TODO set font-family css variable
 const Content = styled.div`

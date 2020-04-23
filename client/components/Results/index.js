@@ -1,13 +1,46 @@
-import React, { useEffect } from 'react';
-import classes from './styles.scss';
-import { Core, Form } from 'components/';
-import { Content, List } from './components';
+import React, { useEffect, useState } from 'react';
+import { List, Header, Content } from './components';
+import { Core, Form } from '../';
 import { Button, Row, Col, Spin } from 'antd';
 import { animateScroll as scroll } from 'react-scroll';
-import sectionModule from 'modules/section';
+import * as sectionModule from '../../modules/section';
 import Router from 'next/router';
+import styled from 'styled-components';
 
-export default function Section({ query }) {
+const Container = styled.div`
+  display: block;
+  position: relative;
+`;
+
+const ResultsContainer = styled(Col)`
+  padding-bottom: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+
+  & .ant-list-pagination {
+    padding-left: 10px;
+  }
+
+  & .ant-list-pagination li {
+    margin-bottom: 10px;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  }
+
+  @media (max-width: 992px) {
+    & {
+      box-shadow: none;
+    }
+  }
+
+  @media (min-width: 992px) {
+    & {
+      box-shadow: 0 15px 50px rgba(233, 233, 233, 0.7);
+    }
+  }
+`;
+
+
+export default function Results({ query }) {
   const graphRef = React.useRef();
 
   const { search, sectionId } = query;
@@ -82,32 +115,11 @@ export default function Section({ query }) {
     scroll.scrollTo(graphRef.current.offsetTop);
   }
 
-  const content = () => {
-    if (section) {
-      return <Content section={section} otherSections={otherSections} history={history} location={location} />;
-    } else if (loadingSection) {
-      return(
-        <div className={classes.loadingContainer}>
-          <Spin className={classes.spinner} />
-        </div>
-      );
-    } else {
-      return (
-        <div className={classes.emptyContainer}>
-          <h2 className={classes.empty}>Nothing to see here, select a section!</h2>
-        </div>
-      );
-    }
-  };
-
   return (
     <Core>
-      <Row className={classes.menu}>
-        <Button className={classes.back} onClick={goHome} type="ghost" shape="circle" icon="home" size="large" />
-        <a href="javascript:void(0)" onClick={goHome}><h2 className={classes.header}><span className={classes.headerBold}>UTD</span> Grades</h2></a>
-      </Row>
+      <Header />
       
-      <div className={classes.content}>
+      <Container>
         <Row>
           <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
             <Form onSubmit={handleSubmit} initialValues={{
@@ -118,7 +130,7 @@ export default function Section({ query }) {
         
         <div id="results">
           <Row>
-            <Col lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }} className={classes.results}>         
+            <ResultsContainer lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }}>         
               <Col lg={{ span: 6 }} sm={{ span: 24 }}>
                 <List data={sections} onClick={handleClick} loading={loadingSections}
                   id={sectionId} />
@@ -126,13 +138,13 @@ export default function Section({ query }) {
 
               <div ref={graphRef}>
                 <Col lg={{ span: 18 }} sm={{ span: 24 }}>
-                  {content()}
+                  <Content section={section} relatedSections={relatedSections} loadingSection={loadingSection} />
                 </Col>
               </div>
-            </Col>
+            </ResultsContainer>
           </Row>
         </div>
-      </div>
+      </Container>
     </Core>
   );
 }

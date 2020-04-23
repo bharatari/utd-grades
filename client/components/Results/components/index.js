@@ -1,9 +1,9 @@
 import Content from './Content';
-import SectionCard from './SectionCard';
 import List from './List';
+import Header from './Header';
 
 export {
   Content,
-  SectionCard,
   List,
+  Header
 };

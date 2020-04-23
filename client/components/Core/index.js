@@ -1,6 +1,6 @@
 import React from 'react';
-import classes from './styles.scss';
-import { Icon, Popover } from 'antd';
+import { Popover } from 'antd';
+import Icon from '@ant-design/icons';
 import styled from 'styled-components';
 
 const Container = styled.div`

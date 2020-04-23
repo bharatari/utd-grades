@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './styles.scss';
 import { Core, Form } from 'components/';
 import { Content, List } from './components';
@@ -88,7 +88,7 @@ export default function Section({ search, location, history }) {
 
   const content = () => {
     if (section) {
-      return <Content section={section} otherSections={otherSections} history={history} location={location} />;
+      return <Content section={section} relatedSections={relatedSections} history={history} location={location} />;
     } else if (loadingSection) {
       return(
         <div className={classes.loadingContainer}>

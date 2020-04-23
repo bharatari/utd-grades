@@ -1,9 +1,5 @@
-import data from 'utils/data';
-import { all, put, take, call, takeLatest, throttle } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
-import * as actions from './actions';
+import data from '../../utils/data';
 
-// search, courseNumber, coursePrefix
 export async function fetchSections(params) {
   try { 
     const response = await data.request('section', 'get', null, params);

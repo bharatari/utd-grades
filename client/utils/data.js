@@ -1,12 +1,11 @@
 import _ from 'lodash';
-import { localStorageAuthToken } from 'constants/keys';
 import fetch from 'isomorphic-fetch';
 
 export default {
   base() {
-    if (__DEV__) {
+    if (process.env.NODE_ENV === 'development') {
       return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/production';
-    } else if (__TEST__) {
+    } else if (process.env.NODE_ENV === 'test') {
       return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/production';
     } else {
       return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/production';
@@ -72,10 +71,6 @@ export default {
       ...this.options
     };
 
-    if (localStorage.getItem(localStorageAuthToken)) {
-      options.headers['Authorization'] = 'Bearer ' + localStorage.getItem(localStorageAuthToken);
-    }
-
     if (body) {
       if (serialize) {
         options.body = JSON.stringify(body);
@@ -136,9 +131,6 @@ export default {
     }
       
     return '?' + ret.join("&");
-  },
-  getAuthToken() {
-    return localStorage.getItem(localStorageAuthToken);
   },
   processSettings(settings) {
     if (settings) {

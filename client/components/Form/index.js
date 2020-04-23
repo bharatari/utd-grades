@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Form, Popover as AntPopover, Input } from 'antd';
+import { Form as AntForm, Popover as AntPopover, Input } from 'antd';
 import styled from 'styled-components';
 
 const StyledSearch = styled(Input.Search)`
@@ -43,21 +43,15 @@ export default function Form({ onSubmit }) {
   return (
     <Formik onSubmit={onSubmit}>
       {(values, handleSubmit) => (
-        <Form onSubmit={handleSubmit}>
+        <AntForm onSubmit={handleSubmit}>
           <StyledSearch name="search" size="large" placeholder="ex. CS 1337 Fall 2017 Smith" onSearch={handleSubmit} />
           <Hint content={content} placement="bottom">
             <span style={{ textAlign: 'center' }}>
               Need to know what you can enter? <span style={{ textDecoration: 'underline' }}>Pretty much anything.</span>
             </span>
           </Hint>
-        </Form>
+        </AntForm>
       )}
-    </Formik>
-    
-    );
+    </Formik> 
+  );
 }
-
-export default reduxForm({
-  form: 'homeForm',
-  destroyOnUnmount: false,
-})(HomeForm);
