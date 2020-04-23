@@ -12,7 +12,7 @@ module.exports = {
   },
 
   async parseSearchString(search) {
-    const searchString = search.lower();
+    const searchString = search.toLowerCase();
 
     const prefixPattern = /(?<!\w)(?!summer|spring|fall)([a-zA-Z]{2,4})(?=(\s|\d+))/
     const numberPattern = /(?:(?<!fall\s)|(?<!fall)|(?<!spring\s)|(?<!spring)|(?<!summer\s)|(?<!summer))(\d{4})/
@@ -20,15 +20,15 @@ module.exports = {
     const semesterPattern = /(fall|spring|summer)(?=\d{4}|\s\d{4})/
     const sectionPattern = /(?:(?<=\d{4})|(?<=\d{4}\s)|(?<=\.))(\d{1,3}|\w{1,3})(?=\s|$)/
 
-    const prefix = prefixPattern.match(searchString);
-    const number = numberPattern.match(searchString);
-    const year = yearPattern.match(searchString);
-    const semester = semesterPattern.match(searchString);
-    const section = sectionPattern.search(searchString);
+    let prefix = searchString.match(prefixPattern);
+    let number = searchString.match(numberPattern);
+    let year = searchString.match(yearPattern);
+    let semester = searchString.match(semesterPattern);
+    let section = searchString.search(sectionPattern);
 
     const params = {};
   
-    const professor = searchString;
+    let professor = searchString;
 
     if (prefix) {
       prefix = prefix[0];

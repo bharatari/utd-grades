@@ -8,7 +8,7 @@ class SectionService {
   constructor(sequelize) {
     this.sequelize = init();
   }
-  
+
   async get(id) {
     try {
       const models = this.sequelize.models;
@@ -20,13 +20,11 @@ class SectionService {
         },
         include: [
           {
-            model: models.professor
+            model: models.professor,
           },
           {
             model: models.course,
-            include: [
-              { model: models.semester },
-            ],
+            include: [{ model: models.semester }],
           },
         ],
       });
@@ -41,7 +39,7 @@ class SectionService {
     }
   }
 
-  async find(queryParams) {
+  async find(queryParams = {}) {
     try {
       const models = this.sequelize.models;
       const Section = models.section;
@@ -63,7 +61,7 @@ class SectionService {
           const firstName = queryParams['firstName'].trim();
 
           where.firstName = {
-            [Op.iLike]: `%${firstName}%`
+            [Op.iLike]: `%${firstName}%`,
           };
         }
 
@@ -71,7 +69,7 @@ class SectionService {
           const lastName = queryParams['lastName'].trim();
 
           where.lastName = {
-            [Op.iLike]: `%${lastName}%`
+            [Op.iLike]: `%${lastName}%`,
           };
         }
 
@@ -88,7 +86,7 @@ class SectionService {
         if (!_.isNil(queryParams['coursePrefix'])) {
           where.prefix = queryParams['coursePrefix'].toUpperCase().trim();
         }
-        
+
         return where;
       }
 
@@ -105,9 +103,27 @@ class SectionService {
 
         return where;
       }
+      
+      function sectionOrder() {
+        const { sortField = 'number', sortDirection = 'DESC' } = queryParams;
+        let order;
+
+        if (sortField === 'year' || sortField === 'type') {
+          order = [models.course, models.semester, sortField, sortDirection];
+        } else if (sortField === 'firstName' || sortField === 'lastName') {
+          order = [models.professor, sortField, sortDirection];
+        } else if (sortField === 'coursePrefix' || sortField === 'courseNumber') {
+          order = [models.course, sortField, sortDirection];
+        } else if (sortField === 'number') {
+          order = [sortField, sortDirection];
+        }
+
+        return order;
+      }
 
       const sections = await Section.findAll({
         where: sectionWhere(),
+        order: [sectionOrder()],
         include: [
           {
             model: models.professor,
