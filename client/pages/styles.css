@@ -2,7 +2,7 @@
   --font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
 
-html, body, #app {
+html, body {
   height: 100%;
 }
 
@@ -10,4 +10,9 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+}
+
+#__next {
+  height: 100%;
+  width: 100%;
 }

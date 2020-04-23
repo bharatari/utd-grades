@@ -4,11 +4,17 @@ import styled from 'styled-components';
 import { Core, Form } from '../components';
 import { Row, Col } from 'antd';
 
-// TODO set font-family css variable
 const Content = styled.div`
-  padding-top: 30vh; 
   display: block;
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const Main = styled.div`
+  width: 100%;
 `;
 
 const Header = styled.h2`
@@ -46,13 +52,13 @@ export default function Home() {
   return (
     <Core> 
       <Content>
-        <Row>
+        <Main>
           <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
             <Header><HeaderBold>UTD</HeaderBold> Grades</Header>
             <Description>See how students did in any given class. And it's <strong>free, forever.</strong></Description>
             <Form onSubmit={handleSubmit} />
           </Col>
-        </Row>
+        </Main>
       </Content>
     </Core>
   )

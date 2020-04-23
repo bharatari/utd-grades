@@ -6,22 +6,27 @@ import styled from 'styled-components';
 const Container = styled.div`
   min-height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const Body = styled.div`
-  padding-bottom: 150px;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
 `;
 
 const Footer = styled.div`
-  position: absolute;
-  bottom: 15px;
   text-align: center;
   width: 100%;
   display: block;
-  height: 60px;
   font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   padding-left: 10px;
   padding-right: 10px;
+  padding-top: 150px;
+  padding-bottom: 15px;
 `;
 
 function Core({ children }) {
