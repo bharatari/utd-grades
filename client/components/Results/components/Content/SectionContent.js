@@ -66,7 +66,8 @@ const Total = styled.h5`
 `;
 
 const Section = styled.span`
-  color: rgb(165, 165, 165);
+  color: rgb(198, 198, 198);
+  font-weight: 400;
 `;
 
 const OtherSectionsHeader = styled.p`
@@ -89,6 +90,7 @@ const SectionsContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   padding: 10px;
   margin-left: -10px;
+  width: 100%;
 `;
 
 const Stack = styled.div`

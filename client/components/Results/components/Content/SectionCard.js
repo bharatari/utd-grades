@@ -48,12 +48,13 @@ export default function SectionCard({ section }) {
   function handleClick(e) {
     e.preventDefault();
 
-    Router.push('/results', {
+    Router.push({
+      pathname: '/results',
       query: {
         search: `${section.course.prefix} ${section.course.number}`,
         sectionId: section.id
       }
-    });
+    }, { shallow: true });
   }
 
   return (

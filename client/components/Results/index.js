@@ -4,7 +4,7 @@ import { Core, Form } from '../';
 import { Row, Col } from 'antd';
 import { animateScroll as scroll } from 'react-scroll';
 import * as sectionModule from '../../modules/section';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -40,15 +40,16 @@ const ResultsContainer = styled(Col)`
 `;
 
 
-export default function Results({ query }) {
+export default function Results() {
   const graphRef = React.useRef();
 
-  const { search, sectionId } = query;
+  const router = useRouter();
+  const { search, sectionId } = router.query;
 
-  const [sections, setSections] = useState([]);
-  const [loadingSections, setLoadingSections] = useState(false);
+  const [sections, setSections] = useState(null);
+  const [loadingSections, setLoadingSections] = useState(true);
 
-  const [relatedSections, setRelatedSections] = useState([]);
+  const [relatedSections, setRelatedSections] = useState(null);
 
   const [section, setSection] = useState(null);
   const [loadingSection, setLoadingSection] = useState(false);
@@ -56,7 +57,7 @@ export default function Results({ query }) {
   
   useEffect(() => {
     async function fetchSections() {
-      setSections([]);
+      setSections(null);
       setSection(null);
   
       if (search) {
@@ -75,17 +76,13 @@ export default function Results({ query }) {
   useEffect(() => {
     async function fetchSection() {
       if (sectionId != null) {
-        setRelatedSections([]);
+        setSection(null);
         setLoadingSection(true);
   
         const response = await sectionModule.fetchSection(sectionId);
   
         setSection(response);
         setLoadingSection(false);
-      } else {
-        Router.push('/results', {
-          query: {}
-        });
       }
     }
 
@@ -95,6 +92,8 @@ export default function Results({ query }) {
   useEffect(() => {
     async function fetchRelatedSections() {
       if (section) {
+        setRelatedSections(null);
+
         const response = await sectionModule.fetchSections({
           courseNumber: section.course.number,
           coursePrefix: section.course.prefix,
@@ -108,15 +107,17 @@ export default function Results({ query }) {
   }, [section]);
 
   function handleSubmit({ search }) {
-    Router.push('/results', {
+    router.push({
+      pathname: '/results',
       query: { search }
-    });
+    }, { shallow: true });
   }
 
   function handleClick(id) {
-    Router.push('/results', {
+    router.push({
+      pathname: '/results',
       query: { search, sectionId: id }
-    });
+    }, { shallow: true });
 
     scroll.scrollTo(graphRef.current.offsetTop);
   }

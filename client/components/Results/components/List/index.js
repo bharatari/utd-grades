@@ -1,10 +1,11 @@
 import React from 'react';
 import { List, Spin, Popover as AntPopover } from 'antd';
-import Icon, { FrownTwoTone } from '@ant-design/icons';
+import { FrownTwoTone, UserOutlined } from '@ant-design/icons';
 import general from '../../../../utils/general';
 import styled, { css } from 'styled-components';
+import { sum } from 'lodash/fp';
 
-const Item = styled.div`
+const Item = styled(List.Item)`
   padding: 25px;
   border-right: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
@@ -56,10 +57,6 @@ const EmptyContainer = styled.div`
   padding: 30px;
 `;
 
-const Pagination = styled.div`
-  margin-right: 10px !important;
-`;
-
 const Error = styled.p`
   font-family: var(--font-family);
   font-size: 22px;
@@ -78,14 +75,18 @@ const StyledIcon = styled(FrownTwoTone)`
 `;
 
 const LoadingItem = styled(List.Item)`
-  padding-left: 20px;
-  padding-top: 20px;
-  border: none !important;
+  &&& {
+    padding-top: 40px;
+    border: none !important;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
 `;
 
-const IconText = ({ type, text }) => (
+const IconText = ({ icon, text }) => (
   <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
+    {React.createElement(icon, { style: { marginRight: 8 } })}
     {text}
   </span>
 );
@@ -127,13 +128,13 @@ export default function ResultsList({ loading, id, data, onClick }) {
           dataSource={data}
           renderItem={item => {  
             const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(item.grades));
-            const total = _.sum(values);
-            
+            const total = sum(values);
+
             return (
               <Item
                 key={item.id}
                 selected={item.id == id}
-                actions={[<IconText type="user" text={total} />]}
+                actions={[<IconText icon={UserOutlined} text={total} key="students-total" />]}
                 onClick={() => onClick(item.id)}>
                 <List.Item.Meta
                   title={<a href="#">{item.course.prefix} {item.course.number}.{item.number}</a>}
@@ -159,10 +160,6 @@ export default function ResultsList({ loading, id, data, onClick }) {
       </List>
     );
   } else {
-    return (
-      <div>
-        <p>Search for something!</p>
-      </div>
-    );
+    return empty;
   }
 }

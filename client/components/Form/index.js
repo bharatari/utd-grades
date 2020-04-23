@@ -45,7 +45,7 @@ export default function Form({ onSubmit, initialValues: { search } = { search: '
 
   return (
     <AntForm>
-      <StyledSearch name="search" size="large" placeholder="ex. CS 1337 Fall 2017 Smith" onSearch={handleSubmit} />
+      <StyledSearch name="search" size="large" placeholder="ex. CS 1337 Fall 2017 Smith" onSearch={handleSubmit} defaultValue={search} />
       <Hint content={content} placement="bottom">
         <span style={{ textAlign: 'center' }}>
           Need to know what you can enter? <span style={{ textDecoration: 'underline' }}>Pretty much anything.</span>

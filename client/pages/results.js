@@ -1,6 +1,5 @@
 import { Results as ResultsComponent, Core, Header } from '../components';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
 
 const Stack = styled.div`
   display: flex;
@@ -9,13 +8,11 @@ const Stack = styled.div`
 `;
 
 export default function Results() {
-  const router = useRouter();
-
   return (
     <Core>
       <Stack>
         <Header />
-        <ResultsComponent query={router.query} />
+        <ResultsComponent />
       </Stack>
     </Core>
   );
