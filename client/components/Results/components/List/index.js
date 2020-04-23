@@ -1,13 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { List, Spin, Popover as AntPopover } from 'antd';
-import Icon from '@ant-design/icons';
+import Icon, { FrownTwoTone } from '@ant-design/icons';
 import general from '../../../../utils/general';
 import styled, { css } from 'styled-components';
 
 const Item = styled.div`
-  padding-left: 20px;
+  padding: 25px;
   border-right: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
   cursor: pointer;
   transition: all 300ms ease-out;
   font-family: var(--font-family);
@@ -23,6 +23,10 @@ const Item = styled.div`
   & .ant-list-item-meta-title a {
     font-weight: 600;
     font-family: var(--font-family);
+  }
+
+  & .ant-list-item-meta {
+    margin-bottom: 0px;
   }
 
   ${props => props.selected ? selectedStyles : ''}
@@ -64,7 +68,7 @@ const Error = styled.p`
   font-weight: 300;
 `;
 
-const StyledIcon = styled(Icon)`
+const StyledIcon = styled(FrownTwoTone)`
   font-size: 42px;
   width: 43px;
   margin-bottom: 15px;
@@ -86,80 +90,78 @@ const IconText = ({ type, text }) => (
   </span>
 );
 
-export default class ResultsList extends React.Component {
-  render() {
-    const popover = (
-      <Popover>
-        <p>Because of FERPA restrictions, grade data for certain classes — in particular, classes with a small number of students — is unavailable.</p>
-      </Popover>
-    );
+export default function ResultsList({ loading, id, data, onClick }) {
+  const popover = (
+    <Popover>
+      <p>Because of FERPA restrictions, grade data for certain classes — in particular, classes with a small number of students — is unavailable.</p>
+    </Popover>
+  );
 
-    const empty = (
-      <EmptyContainer>
-        <StyledIcon type="frown" theme="twoTone" />
-        <Error>We weren't able to find that. Try searching for something else!</Error>
-        <Hint content={popover} placement="bottom">
-          <span style={{ textAlign: 'center' }}>
-            Still can't find what you're looking for? <span style={{ textDecoration: 'underline' }}>Learn more.</span>
-          </span>
-        </Hint>
-      </EmptyContainer>
-    );
+  const empty = (
+    <EmptyContainer>
+      <StyledIcon />
+      <Error>We weren't able to find that. Try searching for something else!</Error>
+      <Hint content={popover} placement="bottom">
+        <span style={{ textAlign: 'center' }}>
+          Still can't find what you're looking for? <span style={{ textDecoration: 'underline' }}>Learn more.</span>
+        </span>
+      </Hint>
+    </EmptyContainer>
+  );
 
-    if (this.props.data) {
-      if (this.props.data.length < 1) {
-        return empty;
-      } else {
-        return (
-          <List
-            itemLayout="vertical"
-            size="large"
-            pagination={{
-              pageSize: 8,
-              style: {
-                marginRight: '10px'
-              },
-            }}
-            dataSource={this.props.data}
-            renderItem={item => {  
-              const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(item.grades));
-              const total = _.sum(values);
-              
-              return (
-                <Item
-                  key={item.id}
-                  selected={item.id == this.props.id}
-                  actions={[<IconText type="user" text={total} />]}
-                  onClick={() => this.props.onClick(item.id)}>
-                  <List.Item.Meta
-                    title={<a href="javascript:void(0)">{item.course.prefix} {item.course.number}.{item.number}</a>}
-                    description={`${item.professor.lastName}, ${item.professor.firstName} - ${item.course.semester.name}`}
-                  />
-                </Item>
-              );
-            }}
-          />
-        );
-      }
-    } else if (this.props.loading) {
+  if (data) {
+    if (data.length < 1) {
+      return empty;
+    } else {
       return (
         <List
           itemLayout="vertical"
           size="large"
           pagination={{
             pageSize: 8,
-          }}>
-          <LoadingItem>
-            <Spin />
-          </LoadingItem>
-        </List>
-      );
-    } else {
-      return (
-        <div>
-          <p>Search for something!</p>
-        </div>
+            style: {
+              marginRight: '10px'
+            },
+          }}
+          dataSource={data}
+          renderItem={item => {  
+            const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(item.grades));
+            const total = _.sum(values);
+            
+            return (
+              <Item
+                key={item.id}
+                selected={item.id == id}
+                actions={[<IconText type="user" text={total} />]}
+                onClick={() => onClick(item.id)}>
+                <List.Item.Meta
+                  title={<a href="#">{item.course.prefix} {item.course.number}.{item.number}</a>}
+                  description={`${item.professor.lastName}, ${item.professor.firstName} - ${item.course.semester.name}`}
+                />
+              </Item>
+            );
+          }}
+        />
       );
     }
+  } else if (loading) {
+    return (
+      <List
+        itemLayout="vertical"
+        size="large"
+        pagination={{
+          pageSize: 8,
+        }}>
+        <LoadingItem>
+          <Spin />
+        </LoadingItem>
+      </List>
+    );
+  } else {
+    return (
+      <div>
+        <p>Search for something!</p>
+      </div>
+    );
   }
 }

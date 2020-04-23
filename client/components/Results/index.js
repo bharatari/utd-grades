@@ -60,11 +60,12 @@ export default function Results({ query }) {
       setSection(null);
   
       if (search) {
-        setLoadingSection(true);
+        setLoadingSections(true);
   
         const response = await sectionModule.fetchSections({ search });
   
         setSections(response);
+        setLoadingSections(false);
       }
     }
 
@@ -75,10 +76,12 @@ export default function Results({ query }) {
     async function fetchSection() {
       if (sectionId != null) {
         setRelatedSections([]);
+        setLoadingSection(true);
   
         const response = await sectionModule.fetchSection(sectionId);
   
         setSection(response);
+        setLoadingSection(false);
       } else {
         Router.push('/results', {
           query: {}
