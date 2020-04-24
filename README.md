@@ -8,7 +8,7 @@ This monorepo consists of 4 sub-projects split into the core application and sid
 
 Core Application:
 * The `client` folder contains the project's front-end built with React and Redux
-* The `functions` folder contains the project's backend code built as Node.js AWS Lambda functions with the Serverless framework. We use a PostgreSQL database with the Sequelize Node.js ORM
+* The `functions` folder contains the project's backend code built as Node.js AWS Lambda functions with the Serverless Framework
 
 Side Utilities:
 * The `converter` folder contains a Python script that converts the Excel file of grade distributions into a JSON file fitting our own data format
@@ -16,13 +16,15 @@ Side Utilities:
 
 There is also a `data` folder that contains all currently received grade data with the original Excel files and converted JSON files.
 
+## Development
+
+Development steps are listed within each module's README.
+
 ## Deploying
 
-The two parts making up the core application are the `client` and `functions` modules. The deployment process for both are separate, allowing changes to be made to each module independently from the other. 
+The two parts making up the core application are the `client` and `functions` modules. The deployment process for both are separate, allowing changes to be made to each service independently from the other. 
 
-The `client` module is deployed by running `npm run build` in the `client` folder and uploading the built application to the website's S3 bucket.
-
-The `functions` folder uses the Serverless Framework to manage and deploy our serverless infrastructure (running on AWS Lambda). To deploy to production, simply run `serverless deploy --production`.
+Deployment steps are listed within each module's README.
 
 ## Uploading New Data
 

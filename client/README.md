@@ -1,30 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+# UTD Grades Client
+
+A React.js client built using Next.js and styled-components.
 
 ## Getting Started
 
-First, run the development server:
+1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
+2. Change into the `client` folder
+    ```bash
+    cd client
+    ```
+2. Install dependencies
+    
+    ```bash
+    npm install
+    ```
+3. Start the app
+    
+    ```bash
+    npm run dev
+    ```
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Access the client at [http://localhost:3000](http://localhost:3000). The app will hot reload as you make changes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Our current deployment strategy consists of building the client as static site and deploying the built assets onto a dedicated S3 bucket. 
 
-## Learn More
+As our client currently does not make use of any server-side rendering features such as Next.js's `getInitialProps` function, we can use the standard build procedure rather than having to use the `next export` command.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on ZEIT Now
-
-The easiest way to deploy your Next.js app is to use the [ZEIT Now Platform](https://zeit.co/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Run `npm run build` or `next build`
+2. Copy the built assets onto S3 bucket (or any static site host)
