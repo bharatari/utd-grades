@@ -4,14 +4,17 @@ module.exports = {
       const search = queryParams['search'];
 
       if (search) {
-        queryParams = await this.parseSearchString(search);
+        queryParams = {
+          ...queryParams,
+          ...this.parseSearchString(search)
+        };
       }
     }
 
     return queryParams;
   },
 
-  async parseSearchString(search) {
+  parseSearchString(search) {
     const searchString = search.toLowerCase();
 
     const prefixPattern = /(?<!\w)(?!summer|spring|fall)([a-zA-Z]{2,4})(?=(\s|\d+))/
