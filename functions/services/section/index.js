@@ -4,11 +4,11 @@ const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 
-class Section {
+class SectionService {
   constructor(sequelize) {
     this.sequelize = init();
   }
-  
+
   async get(id) {
     try {
       const models = this.sequelize.models;
@@ -20,13 +20,11 @@ class Section {
         },
         include: [
           {
-            model: models.professor
+            model: models.professor,
           },
           {
             model: models.course,
-            include: [
-              { model: models.semester },
-            ],
+            include: [{ model: models.semester }],
           },
         ],
       });
@@ -41,7 +39,7 @@ class Section {
     }
   }
 
-  async find(queryParams) {
+  async find(queryParams = {}) {
     try {
       const models = this.sequelize.models;
       const Section = models.section;
@@ -63,7 +61,7 @@ class Section {
           const firstName = queryParams['firstName'].trim();
 
           where.firstName = {
-            [Op.iLike]: `%${firstName}%`
+            [Op.iLike]: `%${firstName}%`,
           };
         }
 
@@ -71,7 +69,7 @@ class Section {
           const lastName = queryParams['lastName'].trim();
 
           where.lastName = {
-            [Op.iLike]: `%${lastName}%`
+            [Op.iLike]: `%${lastName}%`,
           };
         }
 
@@ -88,7 +86,7 @@ class Section {
         if (!_.isNil(queryParams['coursePrefix'])) {
           where.prefix = queryParams['coursePrefix'].toUpperCase().trim();
         }
-        
+
         return where;
       }
 
@@ -105,9 +103,33 @@ class Section {
 
         return where;
       }
+      
+      const sectionOrder = () => {
+        const { sortField = 'number', sortDirection = 'ASC' } = queryParams;
+        let order = [];
+
+        if (sortField === 'year' || sortField === 'type') {
+          order.push([models.course, models.semester, sortField, sortDirection]);
+        } else if (sortField === 'firstName' || sortField === 'lastName') {
+          order.push([models.professor, sortField, sortDirection]);
+        } else if (sortField === 'coursePrefix' || sortField === 'courseNumber') {
+          order.push([models.course, sortField, sortDirection]);
+        }
+        
+        const sectionNumber = this.sequelize.cast(this.sequelize.fn('REGEXP_REPLACE', this.sequelize.col('section.number'), '[^0-9]', ''), 'integer');
+
+        if (sortField === 'number') {
+          order.push([sectionNumber, sortDirection]);
+        } else {
+          order.push([sectionNumber, 'ASC']);
+        }
+
+        return order;
+      }
 
       const sections = await Section.findAll({
         where: sectionWhere(),
+        order: sectionOrder(),
         include: [
           {
             model: models.professor,
@@ -137,4 +159,4 @@ class Section {
   }
 }
 
-module.exports = Section;
+module.exports = SectionService;

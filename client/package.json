@@ -1,38 +1,30 @@
 {
   "name": "utd-grades-client",
-  "version": "0.2.1",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "build": "nwb build-react-app",
-    "clean": "nwb clean-app",
-    "start": "nwb serve-react-app",
-    "test": "nwb test-react",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "antd": "^3.9.2",
-    "chart.js": "^2.7.2",
+    "@ant-design/icons": "^4.0.6",
+    "antd": "^4.1.4",
+    "chart.js": "^2.9.3",
+    "formik": "^2.1.4",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.10",
-    "query-string": "^6.2.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
-    "react-scroll": "^1.7.10",
-    "react-transition-group": "^2.5.0",
-    "redux": "^4.0.0",
-    "redux-actions": "^2.6.1",
-    "redux-form": "^7.4.2",
-    "redux-saga": "^0.16.0",
-    "reselect": "^4.0.0"
+    "lodash": "^4.17.15",
+    "next": "9.3.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-scroll": "^1.7.16",
+    "react-transition-group": "^4.3.0",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "nwb": "0.21.x",
-    "nwb-sass": "^0.9.0",
-    "redux-devtools-extension": "^2.13.5"
-  },
-  "author": "",
-  "license": "MIT",
-  "repository": ""
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "prettier": "2.0.5"
+  }
 }

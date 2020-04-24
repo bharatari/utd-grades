@@ -1,15 +1,14 @@
 {
-  "name": "utd-grades",
+  "name": "utd-grades-functions",
   "version": "0.1.0",
   "description": "",
   "dependencies": {
-    "aws-sdk": "^2.330.0",
     "lodash": "^4.17.11",
-    "pg": "^7.5.0",
-    "sequelize": "^4.39.0"
+    "pg": "^8.0.3",
+    "sequelize": "^5.21.7"
   },
   "devDependencies": {
-    "serverless-offline": "^3.27.0"
+    "serverless-offline": "^3.33.0"
   },
   "author": "",
   "license": "ISC"

@@ -4,18 +4,27 @@ UTD Grades is a tool to view grade distributions at UT Dallas.
 
 ## Components
 
-This monorepo consists of 5 sub-projects split into the core application and side utilities.
+This monorepo consists of 4 sub-projects split into the core application and side utilities.
 
 Core Application:
 * The `client` folder contains the project's front-end built with React and Redux
-* The `functions` folder contains the project's backend code built as Node.js AWS Lambda functions with the Serverless framework. We use a PostgreSQL database with the Sequelize Node.js ORM
-* The `nlp` folder contains a natural language processing engine used for parsing incoming searches
+* The `functions` folder contains the project's backend code built as Node.js AWS Lambda functions with the Serverless Framework
 
 Side Utilities:
 * The `converter` folder contains a Python script that converts the Excel file of grade distributions into a JSON file fitting our own data format
 * The `loader` folder contains Node.js data loading script that loads the converted JSON file of grade distributions data into PostgreSQL
 
 There is also a `data` folder that contains all currently received grade data with the original Excel files and converted JSON files.
+
+## Development
+
+Development steps are listed within each module's README.
+
+## Deploying
+
+The two parts making up the core application are the `client` and `functions` modules. The deployment process for both are separate, allowing changes to be made to each service independently from the other. 
+
+Deployment steps are listed within each module's README.
 
 ## Uploading New Data
 
