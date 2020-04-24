@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "dependencies": {
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "pg": "^8.0.3",
     "sequelize": "^5.21.7"
   },
