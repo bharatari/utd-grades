@@ -49,6 +49,10 @@ class SectionService {
 
         if (!_.isNil(queryParams['sectionNumber'])) {
           where.number = queryParams['sectionNumber'].trim();
+
+          if (typeof where.number === 'string') {
+            where.number = where.number.toUpperCase();
+          }
         }
 
         return where;
@@ -103,20 +107,44 @@ class SectionService {
 
         return where;
       }
-      
+
       const sectionOrder = () => {
         const { sortField = 'number', sortDirection = 'ASC' } = queryParams;
         let order = [];
 
         if (sortField === 'year' || sortField === 'type') {
-          order.push([models.course, models.semester, sortField, sortDirection]);
+          order.push([
+            models.course,
+            models.semester,
+            sortField,
+            sortDirection,
+          ]);
         } else if (sortField === 'firstName' || sortField === 'lastName') {
           order.push([models.professor, sortField, sortDirection]);
-        } else if (sortField === 'coursePrefix' || sortField === 'courseNumber') {
+        } else if (
+          sortField === 'coursePrefix' ||
+          sortField === 'courseNumber'
+        ) {
           order.push([models.course, sortField, sortDirection]);
         }
-        
-        const sectionNumber = this.sequelize.cast(this.sequelize.fn('REGEXP_REPLACE', this.sequelize.col('section.number'), '[^0-9]', ''), 'integer');
+
+        const sectionNumber = this.sequelize.cast(
+          this.sequelize.fn('coalesce',
+            this.sequelize.fn(
+              'nullif',
+              this.sequelize.fn(
+                'REGEXP_REPLACE',
+                this.sequelize.col('section.number'),
+                '[^0-9]*',
+                '',
+                'g'
+              ),
+              ''
+            ),
+            '0'
+          ),
+          'integer'
+        );
 
         if (sortField === 'number') {
           order.push([sectionNumber, sortDirection]);
@@ -125,7 +153,7 @@ class SectionService {
         }
 
         return order;
-      }
+      };
 
       const sections = await Section.findAll({
         where: sectionWhere(),
