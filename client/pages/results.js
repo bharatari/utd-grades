@@ -1,5 +1,6 @@
 import { Results as ResultsComponent, Core, Header } from '../components';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 const Stack = styled.div`
   display: flex;
@@ -8,12 +9,20 @@ const Stack = styled.div`
 `;
 
 export default function Results() {
-  return (
-    <Core>
-      <Stack>
-        <Header />
-        <ResultsComponent />
-      </Stack>
-    </Core>
-  );
+  const router = useRouter();
+
+  const { search, sectionId } = router.query;
+
+  if (router.asPath !== router.route) {
+    return (
+      <Core>
+        <Stack>
+          <Header />
+          <ResultsComponent search={search} sectionId={sectionId} router={router} />
+        </Stack>
+      </Core>
+    );
+  }
+
+  return null;
 }

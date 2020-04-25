@@ -3,7 +3,6 @@ import { List, Content } from './components';
 import { Form } from '../';
 import { Row, Col } from 'antd';
 import { fetchSections, fetchSection } from '../../modules/section';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { animateScroll as scroll } from 'react-scroll';
 import { useQuery } from 'react-query';
@@ -40,11 +39,8 @@ const ResultsContainer = styled(Col)`
   }
 `;
 
-export default function Results() {
+export default function Results({ search, sectionId, router }) {
   const scrollRef = useRef();
-
-  const router = useRouter();
-  const { search, sectionId } = router.query;
 
   const { data: sections, status: sectionsStatus, error: sectionsError } = useQuery(
     search && [
