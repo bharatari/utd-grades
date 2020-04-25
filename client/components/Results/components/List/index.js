@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { List, Spin, Popover as AntPopover } from 'antd';
 import { FrownTwoTone, UserOutlined } from '@ant-design/icons';
 import general from '../../../../utils/general';
@@ -91,14 +91,20 @@ const IconText = ({ icon, text }) => (
   </span>
 );
 
-export default function ResultsList({ loading, id, data, onClick }) {
+export default function ResultsList({ loading, id, data, onClick, error }) {
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPage(1);
+  }, [data]);
+
   const popover = (
     <Popover>
       <p>Because of FERPA restrictions, grade data for certain classes — in particular, classes with a small number of students — is unavailable.</p>
     </Popover>
   );
 
-  const empty = (
+  const emptyMessage = (
     <EmptyContainer>
       <StyledIcon />
       <Error>We weren't able to find that. Try searching for something else!</Error>
@@ -107,6 +113,13 @@ export default function ResultsList({ loading, id, data, onClick }) {
           Still can't find what you're looking for? <span style={{ textDecoration: 'underline' }}>Learn more.</span>
         </span>
       </Hint>
+    </EmptyContainer>
+  );
+
+  const errorMessage = (
+    <EmptyContainer>
+      <StyledIcon />
+      <Error>We had trouble getting that for you, please try again.</Error>
     </EmptyContainer>
   );
 
@@ -123,7 +136,9 @@ export default function ResultsList({ loading, id, data, onClick }) {
             style: {
               marginRight: '10px'
             },
-            showSizeChanger: false
+            showSizeChanger: false,
+            current: page,
+            onChange: (page) => setPage(page)
           }}
           dataSource={data}
           renderItem={item => {  
@@ -159,7 +174,9 @@ export default function ResultsList({ loading, id, data, onClick }) {
         </LoadingItem>
       </List>
     );
+  } else if (error) {
+    return errorMessage;
   } else {
-    return empty;
+    return emptyMessage;
   }
 }

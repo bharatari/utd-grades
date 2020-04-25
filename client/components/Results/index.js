@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { List, Content } from './components';
 import { Form } from '../';
 import { Row, Col } from 'antd';
-import * as sectionModule from '../../modules/section';
+import { fetchSections, fetchSection } from '../../modules/section';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { animateScroll as scroll } from 'react-scroll';
+import { useQuery } from 'react-query';
 
 const Container = styled.div`
   display: block;
@@ -45,84 +46,40 @@ export default function Results() {
   const router = useRouter();
   const { search, sectionId } = router.query;
 
-  const [sections, setSections] = useState(null);
-  const [loadingSections, setLoadingSections] = useState(true);
-
-  const [relatedSections, setRelatedSections] = useState(null);
-
-  const [section, setSection] = useState(null);
-  const [loadingSection, setLoadingSection] = useState(false);
-
-  const [sortParams, setSortParams] = useState({
-    sortField: 'year',
-    sortDirection: 'DESC'
-  });
-  
-  useEffect(() => {
-    async function fetchSections() {
-      setSections(null);
-      setSection(null);
-  
-      if (search) {
-        setLoadingSections(true);
-  
-        const response = await sectionModule.fetchSections({ search, ...sortParams });
-  
-        setSections(response);
-        setLoadingSections(false);
-      }
-    }
-
-    fetchSections();
-  }, [search]);
-
-  useEffect(() => {
-    async function fetchSection() {
-      if (sectionId != null) {
-        setSection(null);
-        setLoadingSection(true);
-  
-        const response = await sectionModule.fetchSection(sectionId);
-  
-        setSection(response);
-        setLoadingSection(false);
-      }
-    }
-
-    fetchSection();
-  }, [sectionId]);
-
-  useEffect(() => {
-    async function fetchRelatedSections() {
-      if (section) {
-        setRelatedSections(null);
-
-        const response = await sectionModule.fetchSections({
-          courseNumber: section.course.number,
-          coursePrefix: section.course.prefix,
-        });
-
-        setRelatedSections(response);
-      }
-    }
-
-    fetchRelatedSections();
-  }, [section]);
+  const { data: sections, status: sectionsStatus, error: sectionsError } = useQuery(
+    search && [
+      'sections',
+      { search, sortField: 'year', sortDirection: 'DESC' },
+    ],
+    fetchSections
+  );
+  const { data: section, status: sectionStatus, error: sectionError } = useQuery(sectionId, fetchSection);
+  const { data: relatedSections } = useQuery(
+    section && [
+      'relatedSections',
+      {
+        courseNumber: section.course.number,
+        coursePrefix: section.course.prefix,
+      },
+    ],
+    fetchSections
+  );
 
   function handleSubmit({ search }) {
     router.push({
       pathname: '/results',
-      query: { search }
+      query: { search },
     });
   }
 
   function handleClick(id) {
     router.push({
       pathname: '/results',
-      query: { search, sectionId: id }
+      query: { search, sectionId: id },
     });
 
-    const scrollDistance = window.pageYOffset + scrollRef.current.getBoundingClientRect().top
+    const scrollDistance =
+      window.pageYOffset + scrollRef.current.getBoundingClientRect().top;
 
     scroll.scrollTo(scrollDistance);
   }
@@ -130,34 +87,52 @@ export default function Results() {
   function handleRelatedSectionClick(search, id) {
     router.push({
       pathname: '/results',
-      query: { search, sectionId: id }
+      query: { search, sectionId: id },
     });
 
-    const scrollDistance = window.pageYOffset + scrollRef.current.getBoundingClientRect().top
+    const scrollDistance =
+      window.pageYOffset + scrollRef.current.getBoundingClientRect().top;
 
     scroll.scrollTo(scrollDistance);
   }
 
-  return (      
+  return (
     <Container>
       <Row>
-        <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
+        <Col
+          lg={{ span: 8, offset: 8 }}
+          sm={{ span: 18, offset: 3 }}
+          xs={{ span: 20, offset: 2 }}
+        >
           <Form onSubmit={handleSubmit} initialValues={{ search }} />
         </Col>
       </Row>
-      
+
       <Row>
-        <ResultsContainer lg={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }}>
+        <ResultsContainer
+          lg={{ span: 20, offset: 2 }}
+          xs={{ span: 24, offset: 0 }}
+        >
           <Row>
             <Col lg={6} sm={24}>
-              <List data={sections} onClick={handleClick} loading={loadingSections}
-                id={sectionId} />
+              <List
+                data={sections}
+                onClick={handleClick}
+                loading={sectionsStatus === 'loading'}
+                id={sectionId}
+                error={sectionsError}
+              />
             </Col>
 
-         
             <Col lg={18} sm={24}>
               <div style={{ width: '100%', height: '100%' }} ref={scrollRef}>
-                <Content section={section} relatedSections={relatedSections} loadingSection={loadingSection} handleRelatedSectionClick={handleRelatedSectionClick} />
+                <Content
+                  section={section}
+                  relatedSections={relatedSections}
+                  loadingSection={sectionStatus === 'loading'}
+                  handleRelatedSectionClick={handleRelatedSectionClick}
+                  error={sectionError}
+                />
               </div>
             </Col>
           </Row>
