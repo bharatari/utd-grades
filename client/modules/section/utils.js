@@ -9,10 +9,10 @@ export default {
     return sections;
   },
   buildSectionName(section) {
-    if (section) {
-      const name = `${section.course.prefix} ${section.course.number}.${section.number} - ${section.professor.firstName} ${section.professor.lastName} (${section.course.semester.name})`;
+    if (section && section.course && section.course.semester && section.course.semester.name && typeof section.course.semester.name === 'string') {
+      const [year, semester] = section.course.semester.name.split(' ');
 
-      section.name = name;
+      section.course.semester.name = `${semester} ${year}`;
     }
 
     return section;
