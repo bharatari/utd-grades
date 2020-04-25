@@ -52,6 +52,10 @@ class SectionService {
 
           if (typeof where.number === 'string') {
             where.number = where.number.toUpperCase();
+
+            if (where.number.length < 3) {
+              where.number = where.number.padStart(3, '0');
+            }
           }
         }
 
