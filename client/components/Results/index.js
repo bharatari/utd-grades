@@ -51,9 +51,11 @@ export default function Results() {
       'sections',
       { search, sortField: 'year', sortDirection: 'DESC' },
     ],
-    fetchSections
+    fetchSections,
+    { retry: false }
   );
-  const { data: section, status: sectionStatus, error: sectionError } = useQuery(sectionId, fetchSection);
+
+  const { data: section, status: sectionStatus, error: sectionError } = useQuery(sectionId, fetchSection, { retry: false });
   const { data: relatedSections } = useQuery(
     section && [
       'relatedSections',
@@ -62,7 +64,8 @@ export default function Results() {
         coursePrefix: section.course.prefix,
       },
     ],
-    fetchSections
+    fetchSections,
+    { retry: false }
   );
 
   function handleSubmit({ search }) {
