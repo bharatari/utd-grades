@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { SlideUp } from '../../../Animations';
-import Router from 'next/router';
 
 const Card = styled.div`
   box-shadow: var(--box-shadow-inactive);
