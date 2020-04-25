@@ -1,26 +1,18 @@
 import data from '../../utils/data';
 import utils from './utils';
 
-export async function fetchSections(params) {
-  try { 
-    let response = await data.request('section', 'get', null, params);
+export async function fetchSections(key, params) {
+  let response = await data.request('section', 'get', null, params);
 
-    response = utils.buildSectionNames(response);
+  response = utils.buildSectionNames(response);
 
-    return response;
-  } catch (e) {
-    throw e;
-  }
+  return response;
 }
 
 export async function fetchSection(id) {
-  try {
-    let response = await data.request('section', 'get', id);
+  let response = await data.request('section', 'get', id);
 
-    response = utils.buildSectionName(response);
+  response = utils.buildSectionName(response);
 
-    return response;
-  } catch (e) {
-    throw e;
-  }
+  return response;
 }
