@@ -24,7 +24,7 @@ const Spinner = styled(Spin)`
   display: block !important;
 `;
 
-export default function Content({ section, relatedSections, loadingSection, handleRelatedSectionClick }) {
+export default function Content({ section, relatedSections, loadingSection, handleRelatedSectionClick, error }) {
   if (section) {
     return <SectionContent section={section} relatedSections={relatedSections} handleRelatedSectionClick={handleRelatedSectionClick} />;
   } else if (loadingSection) {
@@ -32,6 +32,12 @@ export default function Content({ section, relatedSections, loadingSection, hand
       <LoadingContainer>
         <Spinner />
       </LoadingContainer>
+    );
+  } else if (error) {
+    return (
+      <EmptyContainer>
+        <Empty>We had trouble loading that for you, please try again.</Empty>
+      </EmptyContainer>
     );
   } else {
     return (

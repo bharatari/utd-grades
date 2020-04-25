@@ -46,14 +46,14 @@ export default function Results() {
   const router = useRouter();
   const { search, sectionId } = router.query;
 
-  const { data: sections, status: sectionsStatus } = useQuery(
+  const { data: sections, status: sectionsStatus, error: sectionsError } = useQuery(
     search && [
       'sections',
       { search, sortField: 'year', sortDirection: 'DESC' },
     ],
     fetchSections
   );
-  const { data: section, status: sectionStatus } = useQuery(sectionId, fetchSection);
+  const { data: section, status: sectionStatus, error: sectionError } = useQuery(sectionId, fetchSection);
   const { data: relatedSections } = useQuery(
     section && [
       'relatedSections',
@@ -120,6 +120,7 @@ export default function Results() {
                 onClick={handleClick}
                 loading={sectionsStatus === 'loading'}
                 id={sectionId}
+                error={sectionsError}
               />
             </Col>
 
@@ -130,6 +131,7 @@ export default function Results() {
                   relatedSections={relatedSections}
                   loadingSection={sectionStatus === 'loading'}
                   handleRelatedSectionClick={handleRelatedSectionClick}
+                  error={sectionError}
                 />
               </div>
             </Col>

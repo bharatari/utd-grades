@@ -91,7 +91,7 @@ const IconText = ({ icon, text }) => (
   </span>
 );
 
-export default function ResultsList({ loading, id, data, onClick }) {
+export default function ResultsList({ loading, id, data, onClick, error }) {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function ResultsList({ loading, id, data, onClick }) {
     </Popover>
   );
 
-  const empty = (
+  const emptyMessage = (
     <EmptyContainer>
       <StyledIcon />
       <Error>We weren't able to find that. Try searching for something else!</Error>
@@ -113,6 +113,13 @@ export default function ResultsList({ loading, id, data, onClick }) {
           Still can't find what you're looking for? <span style={{ textDecoration: 'underline' }}>Learn more.</span>
         </span>
       </Hint>
+    </EmptyContainer>
+  );
+
+  const errorMessage = (
+    <EmptyContainer>
+      <StyledIcon />
+      <Error>We had trouble getting that for you, please try again.</Error>
     </EmptyContainer>
   );
 
@@ -167,7 +174,9 @@ export default function ResultsList({ loading, id, data, onClick }) {
         </LoadingItem>
       </List>
     );
+  } else if (error) {
+    return errorMessage;
   } else {
-    return empty;
+    return emptyMessage;
   }
 }
