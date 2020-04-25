@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { List, Spin, Popover as AntPopover } from 'antd';
 import { FrownTwoTone, UserOutlined } from '@ant-design/icons';
 import general from '../../../../utils/general';
@@ -92,6 +92,12 @@ const IconText = ({ icon, text }) => (
 );
 
 export default function ResultsList({ loading, id, data, onClick }) {
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPage(1);
+  }, [data]);
+
   const popover = (
     <Popover>
       <p>Because of FERPA restrictions, grade data for certain classes — in particular, classes with a small number of students — is unavailable.</p>
@@ -123,7 +129,9 @@ export default function ResultsList({ loading, id, data, onClick }) {
             style: {
               marginRight: '10px'
             },
-            showSizeChanger: false
+            showSizeChanger: false,
+            current: page,
+            onChange: (page) => setPage(page)
           }}
           dataSource={data}
           renderItem={item => {  
