@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+defaults:
+  run:
+    working-directory: functions
+
 env:
   DB_NAME: ${{ secrets.DB_NAME }}
   DB_USER: ${{ secrets.DB_USER }}
