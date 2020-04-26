@@ -1,5 +1,5 @@
-const Connection = require('../../models');
-const respond = require('../../utils/respond');
+const Connection = require('../../../models');
+const respond = require('../../../utils/respond');
 const get = require('./index');
 
 let connection;
