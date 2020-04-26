@@ -3,22 +3,21 @@ service: utd-grades
 custom:
   serverless-offline:
     httpPort: 4000
-  dbConfig: ${file(env.yml)}
+  envVars: ${file(env.json)}
 
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: utd-grades
   region: us-east-2
   stage: ${opt:stage, 'development'}
   stackTags:
     environment: ${self:provider.stage}
     project: utd-grades
   environment:
-    dbName: ${self:custom.dbConfig.dbName}
-    dbUser: ${self:custom.dbConfig.dbUser}
-    dbPass: ${self:custom.dbConfig.dbPass}
-    dbHost: ${self:custom.dbConfig.dbHost}
+    DB_NAME: ${env:DB_NAME, self:custom.envVars.DB_NAME}
+    DB_USER: ${env:DB_USER, self:custom.envVars.DB_USER}
+    DB_PASS: ${env:DB_PASS, self:custom.envVars.DB_PASS}
+    DB_HOST: ${env:DB_HOST, self:custom.envVars.DB_HOST}
 
 package:
   exclude:

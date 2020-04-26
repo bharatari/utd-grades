@@ -1,4 +1,3 @@
-const yaml = require('js-yaml');
 const fs = require('fs');
 
 module.exports = {
@@ -8,7 +7,7 @@ module.exports = {
     if (process.env[name]) {
       return process.env[name];
     } else if (NODE_ENV !== 'production') {
-      const config = yaml.safeLoad(fs.readFileSync('./env.yml', 'utf8'));
+      const config = JSON.parse(fs.readFileSync('./env.json', 'utf8'));
 
       if (config[name]) {
         return config[name];
