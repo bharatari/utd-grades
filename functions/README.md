@@ -29,16 +29,16 @@ Access the server at [http://localhost:4000](http://localhost:4000).
 
 This will run functions locally in a simulated AWS Lambda environment using your locally installed Node runtime. This is great for being able to quickly iterate on your changes but is not a substitute for running within the full AWS Lambda environment.
 
-At some point, you will want to push the functions to AWS Lambda and test them there. To do this, deploy the functions to AWS Lambda under a `development` stage with the following:
+Commits to the `dev` branch will automatically trigger a deploy to the UTD Grades `development` environment, the url of which is automatically set when running the UTD Grades client in development. If you're making changes on your own branch, you will want to push the functions to a personal AWS account to test your work before being merged into the `dev` branch. Make sure you have your own AWS keys configured within your local environment. Then, deploy the functions to your personal AWS account with the following:
 
-1. Deploy functions under `development` stage
+1. Change into the `functions` folder
+    `cd functions`
+2. Deploy functions under `development` stage
     ```bash
     serverless deploy
     ```
 
-Serverless will output the resulting URL of the deployed API.
-
-Keep in mind that if multiple people are developing under the same AWS account, deploying to the `development` stage will overwrite any previous deploy under the `development` stage. If different people are working on different features at the same time, this will be disruptive. To avoid this, have each collaborator use a different AWS account for development purposes.
+Serverless will output the resulting URL of the deployed API. Set this URL within the `base()` function in `client/utils/data.js` so that the client points to this API.
 
 ## Testing
 
@@ -46,4 +46,4 @@ We maintain a very simple set of tests focusing on ensuring modifications to our
 
 ## Deployment
 
-Run `serverless deploy --stage production` within the `functions` folder ensuring that you have an AWS profile called `utd-grades` (with the appropriate AWS account access key and secret pointing to the correct production account) setup on your local machine.
+Commits to master will automatically trigger a deploy to production (assuming tests pass) through a GitHub Actions workflow. For a manual deploy, run `serverless deploy --stage production --aws-profile <set-aws-profile-pointing-to-production-here>` within the `functions` folder ensuring that you have the appropriate AWS profile configured in your local environment.

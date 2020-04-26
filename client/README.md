@@ -24,5 +24,7 @@ Access the client at [http://localhost:3000](http://localhost:3000). The app wil
 
 ## Deployment
 
+The client is deployed to production automatically on commits to master. To trigger a manual production deploy, do the following:
+ 
 1. Run `now` to ensure project is linked to appropriate Vercel account
 2. Run `now --prod`
