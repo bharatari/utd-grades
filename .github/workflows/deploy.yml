@@ -30,6 +30,6 @@ jobs:
         node-version: 12.x
     - run: npm install
     - run: npm test
-    - run: touch env.json
+    - run: echo "{}" > env.json
     - name: Serverless Deploy
       run: npx serverless deploy
