@@ -49,7 +49,7 @@ export default function Home() {
   }
 
   return (
-    <Core> 
+    <Core>
       <Content>
         <Main>
           <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
