@@ -1,8 +1,10 @@
 import React from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
-import { Core, Form } from '../components';
+import { Core, Form, Animations } from '../components';
 import { Row, Col } from 'antd';
+
+const { SlideUp } = Animations;
 
 const Content = styled.div`
   display: block;
@@ -52,11 +54,13 @@ export default function Home() {
     <Core>
       <Content>
         <Main>
-          <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
-            <Header><HeaderBold>UTD</HeaderBold> Grades</Header>
-            <Description>See how students did in any given class. And it's <strong>free, forever.</strong></Description>
-            <Form onSubmit={handleSubmit} />
-          </Col>
+          <SlideUp startAt={100}>
+            <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
+              <Header><HeaderBold>UTD</HeaderBold> Grades</Header>
+              <Description>See how students did in any given class. And it's <strong>free, forever.</strong></Description>
+              <Form onSubmit={handleSubmit} />
+            </Col>
+          </SlideUp>
         </Main>
       </Content>
     </Core>
