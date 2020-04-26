@@ -32,4 +32,4 @@ jobs:
     - run: npm test
     - run: echo "{}" > env.json
     - name: Serverless Deploy
-      run: npx serverless deploy
+      run: npx serverless deploy --stage production
