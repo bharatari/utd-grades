@@ -13,6 +13,9 @@ export default function Results() {
 
   const { search, sectionId } = router.query;
 
+  // Query params not populated on first render in Next.js
+  // Migrate to checking Router.ready when available
+  // https://github.com/zeit/next.js/issues/8259
   if (router.asPath !== router.route) {
     return (
       <Core>
