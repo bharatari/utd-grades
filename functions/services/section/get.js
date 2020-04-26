@@ -1,9 +1,20 @@
+const Connection = require('../../models');
 const SectionService = require('./index');
 const respond = require('../../utils/respond');
 
-module.exports.get = async (event) => {
+let connection;
+
+module.exports.get = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   try {
-    let service = new SectionService();
+    if (!connection) {
+      connection = new Connection();
+    }
+
+    await connection.connect();
+
+    let service = new SectionService(connection);
     let response = await service.get(event.pathParameters.id);
 
     return respond.success(response);

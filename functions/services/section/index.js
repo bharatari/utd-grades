@@ -1,12 +1,11 @@
-const init = require('../../models');
 const _ = require('lodash');
 const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 
 class SectionService {
-  constructor(sequelize) {
-    this.sequelize = init();
+  constructor(connection) {
+    this.sequelize = connection.sequelize;
   }
 
   async get(id) {
@@ -29,12 +28,8 @@ class SectionService {
         ],
       });
 
-      this.sequelize.close();
-
       return section;
     } catch (e) {
-      this.sequelize.close();
-
       throw e;
     }
   }
@@ -180,12 +175,8 @@ class SectionService {
         ],
       });
 
-      this.sequelize.close();
-
       return sections;
     } catch (e) {
-      this.sequelize.close();
-
       throw e;
     }
   }

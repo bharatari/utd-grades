@@ -1,14 +1,22 @@
-const SectionService = require('./index');
+const ProfessorService = require('./index');
 const respond = require('../../utils/respond');
 const utils = require('./utils');
 
-module.exports.find = async (event) => {
+let connection;
+
+module.exports.find = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   try {
-    let service = new SectionService();
+    if (!connection) {
+      connection = new Connection();
+    }
+
+    await connection.connect();
+
+    let service = new ProfessorService(connection);
 
     let queryParams = event['queryStringParameters'];
-    queryParams = await utils.parseSearchStringIfExists(queryParams);
-
     let response = await service.find(queryParams);
     
     return respond.success(response);
