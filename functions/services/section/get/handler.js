@@ -1,9 +1,10 @@
-const ProfessorService = require('./index');
-const respond = require('../../utils/respond');
+const Connection = require('../../../models');
+const respond = require('../../../utils/respond');
+const get = require('./index');
 
 let connection;
 
-module.exports.get = async (event, context) => {
+module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
   try {
@@ -13,8 +14,7 @@ module.exports.get = async (event, context) => {
 
     await connection.connect();
 
-    let service = new ProfessorService(connection);
-    let response = await service.get(event.pathParameters.id);
+    const response = await get(event.pathParameters.id, connection);
 
     return respond.success(response);
   } catch (e) {

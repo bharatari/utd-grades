@@ -1,5 +1,5 @@
 module.exports = {
-  async parseSearchStringIfExists(queryParams) {
+  parseSearchStringIfExists(queryParams) {
     if (queryParams) {
       const search = queryParams['search'];
 
@@ -27,7 +27,7 @@ module.exports = {
     let number = searchString.match(numberPattern);
     let year = searchString.match(yearPattern);
     let semester = searchString.match(semesterPattern);
-    let section = searchString.search(sectionPattern);
+    let section = searchString.match(sectionPattern);
 
     const params = {};
   

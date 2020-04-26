@@ -3,7 +3,6 @@ import { List, Content } from './components';
 import { Form } from '../';
 import { Row, Col } from 'antd';
 import { fetchSections, fetchSection } from '../../modules/section';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { animateScroll as scroll } from 'react-scroll';
 import { useQuery } from 'react-query';
@@ -40,20 +39,19 @@ const ResultsContainer = styled(Col)`
   }
 `;
 
-export default function Results() {
+export default function Results({ search, sectionId, router }) {
   const scrollRef = useRef();
-
-  const router = useRouter();
-  const { search, sectionId } = router.query;
 
   const { data: sections, status: sectionsStatus, error: sectionsError } = useQuery(
     search && [
       'sections',
       { search, sortField: 'year', sortDirection: 'DESC' },
     ],
-    fetchSections
+    fetchSections,
+    { retry: false }
   );
-  const { data: section, status: sectionStatus, error: sectionError } = useQuery(sectionId, fetchSection);
+
+  const { data: section, status: sectionStatus, error: sectionError } = useQuery(sectionId, fetchSection, { retry: false });
   const { data: relatedSections } = useQuery(
     section && [
       'relatedSections',
@@ -62,7 +60,8 @@ export default function Results() {
         coursePrefix: section.course.prefix,
       },
     ],
-    fetchSections
+    fetchSections,
+    { retry: false }
   );
 
   function handleSubmit({ search }) {
@@ -114,7 +113,7 @@ export default function Results() {
           xs={{ span: 24, offset: 0 }}
         >
           <Row>
-            <Col lg={6} sm={24}>
+            <Col lg={6} xs={24}>
               <List
                 data={sections}
                 onClick={handleClick}
@@ -124,7 +123,7 @@ export default function Results() {
               />
             </Col>
 
-            <Col lg={18} sm={24}>
+            <Col lg={18} xs={24}>
               <div style={{ width: '100%', height: '100%' }} ref={scrollRef}>
                 <Content
                   section={section}

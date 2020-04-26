@@ -1,5 +1,5 @@
 import SlideUp from './SlideUp';
 
-export {
+export default  {
   SlideUp,
 };

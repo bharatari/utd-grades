@@ -1,12 +1,11 @@
-const init = require('../../models');
 const _ = require('lodash');
 const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 
 class ProfessorService {
-  constructor(sequelize) {
-    this.sequelize = init();
+  constructor(connection) {
+    this.sequelize = connection.sequelize;
   }
   
   async get(id) {
@@ -25,12 +24,8 @@ class ProfessorService {
         ],
       });
 
-      this.sequelize.close();
-
       return professor;
     } catch (e) {
-      this.sequelize.close();
-
       throw e;
     }
   }
@@ -66,12 +61,8 @@ class ProfessorService {
         where: professorWhere()
       });
 
-      this.sequelize.close();
-
       return professors;
     } catch (e) {
-      this.sequelize.close();
-
       throw e;
     }
   }

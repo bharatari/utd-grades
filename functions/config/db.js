@@ -1,7 +1,8 @@
-module.exports = {
-  dbName: process.env.dbName,
-  dbUser: process.env.dbUser,
-  dbPass: process.env.dbPass,
-  dbHost: process.env.dbHost,
-};
+const keys = require('./keys');
 
+module.exports = {
+  dbName: keys.get('DB_NAME'),
+  dbUser: keys.get('DB_USER'),
+  dbPass: keys.get('DB_PASS'),
+  dbHost: keys.get('DB_HOST'),
+};

@@ -125,7 +125,7 @@ export default function ResultsList({ loading, id, data, onClick, error }) {
 
   if (data) {
     if (data.length < 1) {
-      return empty;
+      return emptyMessage;
     } else {
       return (
         <List
