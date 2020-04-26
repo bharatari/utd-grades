@@ -1,5 +1,5 @@
 const find = require('../index');
-const Connection = require('../../../models/index');
+const Connection = require('../../../../models/index');
 
 let connection;
 
