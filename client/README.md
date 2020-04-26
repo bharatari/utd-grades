@@ -24,9 +24,5 @@ Access the client at [http://localhost:3000](http://localhost:3000). The app wil
 
 ## Deployment
 
-Our current deployment strategy consists of building the client as static site and deploying the built assets onto a dedicated S3 bucket. 
-
-As our client currently does not make use of any server-side rendering features such as Next.js's `getInitialProps` function, we can use the standard build procedure rather than having to use the `next export` command.
-
-1. Run `npm run build` or `next build`
-2. Copy the built assets onto S3 bucket (or any static site host)
+1. Run `now` to ensure project is linked to appropriate Vercel account
+2. Run `now --prod`

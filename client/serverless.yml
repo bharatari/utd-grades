@@ -1,7 +1,0 @@
-component: website
-name: utd-grades
-
-inputs:
-  src:
-    hook: npm run build
-    dist: ./out
