@@ -28,6 +28,6 @@ jobs:
     - run: npm install
     - run: npm test
     - name: Serverless Deploy
-      uses: serverless/github-action@v1
+      uses: serverless/github-action@v1.53.0
       with:
         args: deploy --stage production
