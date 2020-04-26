@@ -113,7 +113,7 @@ export default function Results({ search, sectionId, router }) {
           xs={{ span: 24, offset: 0 }}
         >
           <Row>
-            <Col lg={6} sm={24}>
+            <Col lg={6} xs={24}>
               <List
                 data={sections}
                 onClick={handleClick}
@@ -123,7 +123,7 @@ export default function Results({ search, sectionId, router }) {
               />
             </Col>
 
-            <Col lg={18} sm={24}>
+            <Col lg={18} xs={24}>
               <div style={{ width: '100%', height: '100%' }} ref={scrollRef}>
                 <Content
                   section={section}
