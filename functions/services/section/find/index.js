@@ -5,7 +5,7 @@ module.exports = async (queryParams, connection) => {
   try {
     let service = new SectionService(connection);
 
-    const params = await utils.parseSearchStringIfExists(queryParams);
+    const params = utils.parseSearchStringIfExists(queryParams);
 
     return await service.find(params);
   } catch (e) {

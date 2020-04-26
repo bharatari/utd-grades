@@ -1,5 +1,5 @@
 module.exports = {
-  async parseSearchStringIfExists(queryParams) {
+  parseSearchStringIfExists(queryParams) {
     if (queryParams) {
       const search = queryParams['search'];
 
