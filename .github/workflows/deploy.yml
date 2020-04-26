@@ -12,6 +12,10 @@ env:
   DB_PASS: ${{ secrets.DB_PASS }}
   DB_HOST: ${{ secrets.DB_HOST }}
 
+defaults:
+  run:
+    working-directory: functions
+
 jobs:
   deploy:
     name: Deploy
@@ -24,7 +28,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - run: cd functions
     - run: npm install
     - run: npm test
     - name: Serverless Deploy
