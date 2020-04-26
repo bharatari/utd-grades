@@ -1,6 +1,6 @@
 {
   "name": "utd-grades-functions",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "dependencies": {
     "lodash": "^4.17.15",
