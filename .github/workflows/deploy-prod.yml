@@ -2,7 +2,7 @@ on:
   push:
     branches: [master]
 
-name: Deploy with Serverless Framework
+name: Deploy to Production
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
