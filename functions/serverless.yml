@@ -2,13 +2,13 @@ service: utd-grades
 
 custom:
   serverless-offline:
-    port: 4000
+    httpPort: 4000
   dbConfig: ${file(env.yml)}
 
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: personal
+  profile: utd-grades
   region: us-east-2
   stage: ${opt:stage, 'development'}
   stackTags:
