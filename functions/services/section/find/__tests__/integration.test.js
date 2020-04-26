@@ -123,8 +123,6 @@ describe('Test sample queries', () => {
   });
 });
 
-afterAll(async () => {
-  connection = new Connection();
-
-  await connection.close();
+afterAll(() => {
+  connection.close();
 });
