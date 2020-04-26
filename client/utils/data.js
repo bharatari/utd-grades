@@ -4,9 +4,9 @@ import fetch from 'isomorphic-fetch';
 export default {
   base() {
     if (process.env.NODE_ENV === 'development') {
-      return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/development';
+      return 'https://0zpehlao5a.execute-api.us-east-2.amazonaws.com/development';
     } else if (process.env.NODE_ENV === 'test') {
-      return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/development';
+      return 'https://0zpehlao5a.execute-api.us-east-2.amazonaws.com/development';
     } else {
       return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/production';
     }
