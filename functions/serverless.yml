@@ -20,9 +20,13 @@ provider:
     dbPass: ${self:custom.dbConfig.dbPass}
     dbHost: ${self:custom.dbConfig.dbHost}
 
+package:
+  exclude:
+    - '**/__tests__/**'
+
 functions:
   getSection:
-    handler: services/section/get.get
+    handler: services/section/get/handler.handler
     events:
       - http:
           path: section/{id}
@@ -34,7 +38,7 @@ functions:
           cors: true
   
   findSection:
-    handler: services/section/find.find
+    handler: services/section/find/handler.handler
     events:
       - http:
           path: section
