@@ -104,7 +104,8 @@ export default function SectionContent({ relatedSections, section, handleRelated
     scales: {
       yAxes: [{
         ticks: {
-          beginAtZero:true
+          beginAtZero: true,
+          precision: 0
         },
       }],
     },
