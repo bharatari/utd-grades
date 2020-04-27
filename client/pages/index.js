@@ -2,9 +2,9 @@ import React from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
 import { Core, Form, Animations } from '../components';
-import { Row, Col } from 'antd';
+import { Col } from 'antd';
 
-const { SlideUp } = Animations;
+const { FadeIn } = Animations;
 
 const Content = styled.div`
   display: block;
@@ -54,13 +54,15 @@ export default function Home() {
     <Core>
       <Content>
         <Main>
-          <SlideUp startAt={100}>
-            <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
+          <Col lg={{ span: 8, offset: 8 }} sm={{ span: 18, offset: 3 }} xs={{ span: 20, offset: 2 }}>
+            <FadeIn startAt={0}>
               <Header><HeaderBold>UTD</HeaderBold> Grades</Header>
+            </FadeIn>
+            <FadeIn startAt={300}>
               <Description>See how students did in any given class. And it's <strong>free, forever.</strong></Description>
-              <Form onSubmit={handleSubmit} />
-            </Col>
-          </SlideUp>
+            </FadeIn>
+            <Form onSubmit={handleSubmit} />
+          </Col>
         </Main>
       </Content>
     </Core>
