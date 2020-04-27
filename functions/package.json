@@ -1,6 +1,6 @@
 {
   "name": "utd-grades-functions",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "scripts": {
     "test": "jest",

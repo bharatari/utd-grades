@@ -102,6 +102,22 @@ describe('Test sample queries', () => {
     }
   });
 
+  test('Should handle professor-only', async () => {
+    const queries = [
+      { search: 'Stephen Perkins', expected: { professorFirstName: 'Stephen J', professorLastName: 'Perkins' } },
+      { search: 'Kristen Lawson', expected: { professorFirstName: 'Kristen A', professorLastName: 'Lawson' } }
+    ];
+
+    for (let i = 0; i < queries.length; i++) {
+      const { search, expected } = queries[i];
+      const response = await find({ search }, connection);
+
+      expect(response).not.toHaveLength(0);
+      expect(response[0].professor.firstName).toEqual(expected.professorFirstName);
+      expect(response[0].professor.lastName).toEqual(expected.professorLastName);
+    }
+  });
+
   test('Should handle everything together', async () => {
     const queries = [
       { search: 'CS 1337 502 fall 2019 Stephen Perkins', expected: { coursePrefix: 'CS', courseNumber: '1337', sectionNumber: '501', semesterType: 'fall', year: 2019, professorFirstName: 'Stephen J', professorLastName: 'Perkins' } },
