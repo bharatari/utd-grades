@@ -1,5 +1,7 @@
 # UTD Grades
 
+![Deploy to Production](https://github.com/bharatari/utd-grades/workflows/Deploy%20to%20Production/badge.svg?branch=master)
+
 UTD Grades is a tool to view grade distributions at UT Dallas. 
 
 ## Components
@@ -7,7 +9,7 @@ UTD Grades is a tool to view grade distributions at UT Dallas.
 This monorepo consists of 4 sub-projects split into the core application and side utilities.
 
 Core Application:
-* The `client` folder contains the project's front-end built with React and Redux
+* The `client` folder contains the project's front-end built with React and Next.js
 * The `functions` folder contains the project's backend code built as Node.js AWS Lambda functions with the Serverless Framework
 
 Side Utilities:
