@@ -9,7 +9,7 @@ UTD Grades is a tool to view grade distributions at UT Dallas.
 This monorepo consists of 4 sub-projects split into the core application and side utilities.
 
 Core Application:
-* The `client` folder contains the project's front-end built with React and Redux
+* The `client` folder contains the project's front-end built with React and Next.js
 * The `functions` folder contains the project's backend code built as Node.js AWS Lambda functions with the Serverless Framework
 
 Side Utilities:
