@@ -18,6 +18,7 @@ const Back = styled(Button)`
   outline: none;
   border: none;
   box-shadow: none;
+  visibility: ${props => props.dummy ? 'hidden' : 'visible'};
 `;
 
 const HeaderText = styled.a`
@@ -49,6 +50,7 @@ export default function Header() {
     <Menu>
       <Back onClick={goHome} type="ghost" icon={<HomeOutlined />} shape="circle" size="large" />
       <HeaderText href="#" onClick={goHome}><h2><HeaderBold>UTD</HeaderBold> Grades</h2></HeaderText>
+      <Back dummy={true} onClick={goHome} type="ghost" icon={<HomeOutlined />} shape="circle" size="large" />
     </Menu>
   );
 }
