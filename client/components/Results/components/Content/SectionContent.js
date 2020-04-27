@@ -87,6 +87,7 @@ const SectionsContainer = styled.div`
   flex-flow: row nowrap;
   align-content: flex-start;
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   padding: 10px;
   margin-left: -10px;
