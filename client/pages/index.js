@@ -16,6 +16,7 @@ const Content = styled.div`
 
 const Main = styled.div`
   width: 100%;
+  margin-top: 100px;
 `;
 
 const Header = styled.h2`
