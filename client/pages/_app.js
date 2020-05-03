@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/site.webmanifest"></link>
         <title>UTD Grades</title>
         <meta name="description" content="See how students did in any given class at UT Dallas. And it's free, forever." />
+        <script src="https://cdn.usefathom.com/3.js" site="TLRMRHXS"></script>
         <script async defer data-domain="utdgrades.com" src="https://plausible.io/js/plausible.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128111650-1"></script>
         <script
