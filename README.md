@@ -1,6 +1,8 @@
 # UTD Grades
 
 ![Deploy to Production](https://github.com/bharatari/utd-grades/workflows/Deploy%20to%20Production/badge.svg?branch=master)
+![Deploy to Development](https://github.com/bharatari/utd-grades/workflows/Deploy%20to%20Development/badge.svg)
+![Test](https://github.com/bharatari/utd-grades/workflows/Test/badge.svg)
 
 UTD Grades is a tool to view grade distributions at UT Dallas. 
 
