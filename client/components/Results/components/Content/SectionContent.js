@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Graph } from '../../../';
 import { Row, Spin } from 'antd';
@@ -115,7 +115,7 @@ export default function SectionContent({ relatedSections, section, handleRelated
       mode: 'single',
       callbacks: {
         label: (tooltipItems, data) => {
-          const { keys, values } = general.splitData(general.convertAssociatedArrayToObjectArray(section.grades));
+          const { values } = general.splitData(general.convertAssociatedArrayToObjectArray(section.grades));
           const total = _.sum(values);
 
           let text = [`Students: ${tooltipItems.yLabel}`];
@@ -130,14 +130,19 @@ export default function SectionContent({ relatedSections, section, handleRelated
     },
   });
 
-  function transformData(grades) {
+  const [data, setData] = useState({});
+  const [totalStudents, setTotalStudents] = useState();
+
+  useEffect(() => {
+    const grades = section.grades;
     const objectArray = general.convertAssociatedArrayToObjectArray(grades);
     const sortedGrades = general.sortByGrades(objectArray);
     const { keys, values } = general.splitData(sortedGrades);
     const colors = general.getColors(keys);
 
-    return { keys, values, colors };
-  }
+    setTotalStudents(_.sum(values));
+    setData({ labels: keys, datasets: [{ backgroundColor: colors, data: values }]});
+  }, [section]);
   
   const renderRelatedSections = () => {
     if (relatedSections) {
@@ -149,19 +154,18 @@ export default function SectionContent({ relatedSections, section, handleRelated
     return <Spin />;
   };
 
-  const { keys, values, colors } = transformData(section.grades);
 
   return (
     <Container>
       <Stack>
         <Header>{section.course.prefix} {section.course.number}<Section>.{section.number}</Section></Header>
         <SubHeader>{section.professor.lastName}, {section.professor.firstName} - {section.course.semester.name}</SubHeader>
-        <Total>Total Students <span style={{ color: '#333333' }}>{_.sum(values)}</span></Total>
+        <Total>Total Students <span style={{ color: '#333333' }}>{totalStudents}</span></Total>
       </Stack>
 
       <Row>
         <GraphContainer>
-          <Graph type="bar" data={{ labels: keys, datasets: [{ backgroundColor: colors, data: values }]}} options={options} />
+          <Graph type="bar" data={data} options={options} />
         </GraphContainer>
       </Row>
 

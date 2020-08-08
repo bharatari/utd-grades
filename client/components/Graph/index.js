@@ -1,32 +1,28 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js';
 
-export default class Graph extends React.Component {
-  componentDidMount() {
-    this.initializeChart(this.props);
-  }
-  componentWillUnmount() {
-    this.destroyChart();
-  }
-  getChart = () => {
-    return this.chart;
-  };
-  destroyChart = () => {
-    this.chart && this.chart.destroy();
-  };
-  initializeChart = (props) => {
-    const { data, options, type } = props;
-    const ctx = this.refs['canvas'].getContext('2d');
+export default function Graph({ type, data, options }) {
+  const ref = useRef();
+  const chartInstanceRef = useRef();
 
-    this.chart = new Chart(ctx, {
+  useEffect(() => {
+    const ctx = ref.current.getContext('2d');
+
+    chartInstanceRef.current = new Chart(ctx, {
       type: type,
       data: data,
       options: options
     });
-  };
-  render() {
-    return (
-      <canvas ref='canvas' />
-    );
-  }
+
+    return () => {
+      chartInstanceRef
+        && chartInstanceRef.current
+        && chartInstanceRef.current.destroy();
+    };
+  }, [data])
+
+  console.log('rerender')
+  return (
+    <canvas ref={ref} />
+  );
 }
