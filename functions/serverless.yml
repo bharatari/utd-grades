@@ -30,14 +30,14 @@ functions:
     handler: services/section/get/handler.handler
     events:
       - httpApi:
-          path: section/{id}
+          path: /section/{id}
           method: get
   
   findSection:
     handler: services/section/find/handler.handler
     events:
       - httpApi:
-          path: section
+          path: /section
           method: get
 
 plugins:
