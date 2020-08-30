@@ -8,7 +8,7 @@ export default {
     } else if (process.env.NODE_ENV === 'test') {
       return 'https://0qqbseweak.execute-api.us-east-2.amazonaws.com';
     } else {
-      return 'https://v544dfea4f.execute-api.us-east-2.amazonaws.com/production';
+      return 'https://4i5536aptc.execute-api.us-east-2.amazonaws.com';
     }
   },
   getCurrentBase() {
