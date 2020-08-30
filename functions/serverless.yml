@@ -31,11 +31,7 @@ functions:
     events:
       - httpApi:
           path: section/{id}
-          method: get 
-          request: 
-            parameters: 
-              paths: 
-                id: true
+          method: get
   
   findSection:
     handler: services/section/find/handler.handler
