@@ -18,6 +18,8 @@ provider:
     DB_USER: ${env:DB_USER, self:custom.envVars.DB_USER}
     DB_PASS: ${env:DB_PASS, self:custom.envVars.DB_PASS}
     DB_HOST: ${env:DB_HOST, self:custom.envVars.DB_HOST}
+  httpApi:
+    cors: true
 
 package:
   exclude:
@@ -27,22 +29,16 @@ functions:
   getSection:
     handler: services/section/get/handler.handler
     events:
-      - http:
-          path: section/{id}
-          method: get 
-          request: 
-            parameters: 
-              paths: 
-                id: true
-          cors: true
+      - httpApi:
+          path: /section/{id}
+          method: get
   
   findSection:
     handler: services/section/find/handler.handler
     events:
-      - http:
-          path: section
+      - httpApi:
+          path: /section
           method: get
-          cors: true
 
 plugins:
   - serverless-offline
