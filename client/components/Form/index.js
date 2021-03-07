@@ -29,7 +29,7 @@ export default function Form({
   onSubmit,
   initialValues: { search } = { search: '' },
 }) {
-  const content = (
+  const searchHintContent = (
     <Popover>
       <p>You can search for:</p>
       <ul>
@@ -41,6 +41,16 @@ export default function Form({
       </ul>
     </Popover>
   );
+
+  const fall20HintContent = (
+    <Popover>
+      <p>
+        The university has not yet released grade data for Fall 2020, because
+        students still have the option to opt in to Credit/No Credit grading.
+        Check back after Spring 2021.
+      </p>
+    </Popover>
+  )
 
   useEffect(() => {
     setSearchValue(search);
@@ -66,11 +76,18 @@ export default function Form({
         onChange={handleChange}
         value={searchValue}
       />
-      <Hint content={content} placement="bottom">
+      <Hint content={searchHintContent} placement="bottom">
         <span style={{ textAlign: 'center' }}>
           Need to know what you can enter?{' '}
           <span style={{ textDecoration: 'underline' }}>
             Pretty much anything.
+          </span>
+        </span>
+      </Hint>
+      <Hint content={fall20HintContent} placement="bottom">
+        <span style={{ textAlign: 'center' }}>
+          <span style={{ textDecoration: 'underline' }}>
+            Looking for Fall 2020 grades?
           </span>
         </span>
       </Hint>
